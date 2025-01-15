@@ -30,9 +30,10 @@ source ~/software/miniconda3/etc/profile.d/conda.sh
 conda activate instrain
 
 ####### Run your script #########################
-dRep dereplicate -g HQ_MAGs/*.fa --ignoreGenomeQuality -comp 70 -con 5 --S_algorithm gANI --S_ani 0.95
+dRep dereplicate -g HQ_MAGs/*.fa --ignoreGenomeQuality -comp 70 -con 5 --S_algorithm gANI --S_ani 0.95 dRep_HQ_MAGs
 ```
 
+For dRep to completely run using gANI, I download gANI (aka ANIcalculator) and tar the file in ```~/software``` directory. Then add the executable file ANIcalculator to my PATH
 
 
 
