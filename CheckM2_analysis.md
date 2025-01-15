@@ -38,3 +38,5 @@ To count the number of "Medium Quality" MAGs >70% completenes and < 5% contamina
 ```
 cat quality_report.tsv | awk '$2 > 70' | awk '$3 < 5'
 ```
+
+CheckM2 analysis returned ***150*** Medium quality MAGs
