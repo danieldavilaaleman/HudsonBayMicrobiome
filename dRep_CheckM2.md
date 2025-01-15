@@ -1,4 +1,4 @@
-Due to dRep uses CheckM1 for Genome quality assessment before dereplication, I extracted Medium quality bins (Completeness >70%, contamination <5%) to a new directory before running CheckM1.
+Due to dRep uses CheckM1 for Genome quality assessment before dereplication, I extracted the Medium quality bins (Completeness >70%, contamination <5%) got it using CheckM2 to a new directory before running dRep.
 
 To copy all the medium quality MAGs to a new directory, I created a file with all the quality MAGs
 ```
