@@ -13,8 +13,8 @@ After installation, I ran CheckM2 for all bins created previously with MetaBat2
 ```
 #!/bin/bash
 ####### Reserve computing resources #############
-#SBATCH --time=01:00:00
-#SBATCH --mem=20G
+#SBATCH --time=04:00:00
+#SBATCH --mem=50G
 #SBATCH --partition=bigmem
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
@@ -26,7 +26,7 @@ source ~/software/miniconda3/etc/profile.d/conda.sh
 conda activate checkm2
 
 ####### Run your script #########################
-~/software/checkm2/bin/checkm2 predict --threads 10 --input ../All_bins/*.fa --output-directory Output \
+~/software/checkm2/bin/checkm2 predict --threads 20 --input ../All_bins/*.fa --output-directory Output \
 --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
 ```
 
