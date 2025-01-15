@@ -1,6 +1,6 @@
 For updated MAGs evaluation for completeness and contamination, 
 I installed [CheckM2](https://github.com/chklovski/CheckM2) 
-which improves the prediction of MAGs quality using ML.
+which improves the prediction of MAGs quality using ML. The version that I am using is CheckM2 version 1.0.2
 
 For installation:
 ```
