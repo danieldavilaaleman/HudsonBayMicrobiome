@@ -29,3 +29,7 @@ conda activate checkm2
 ~/software/checkm2/bin/checkm2 predict --threads 10 --input ../All_bins/*.fa --output-directory Output \
 --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
 ```
+
+[01/15/2025 11:38:24 AM] INFO: CheckM2 finished successfully.
+
+I created a softlink for GENICE directory using ```ln -s //work/ebg_gm/gm/GENICE/M_Bautista/maria/GENICE``` - So the output of CheckM2 is on ```/home/franciscodaniel.davi/genice/Binning_MetaBAT2/CheckM2_allBins/Output```
