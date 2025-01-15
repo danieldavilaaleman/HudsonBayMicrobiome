@@ -33,3 +33,8 @@ conda activate checkm2
 [01/15/2025 11:38:24 AM] INFO: CheckM2 finished successfully.
 
 I created a softlink for GENICE directory using ```ln -s //work/ebg_gm/gm/GENICE/M_Bautista/maria/GENICE``` - So the output of CheckM2 is on ```/home/franciscodaniel.davi/genice/Binning_MetaBAT2/CheckM2_allBins/Output```
+
+To count the number of "Medium Quality" MAGs >70% completenes and < 5% contamination, I used:
+```
+cat quality_report.tsv | awk '$2 > 70' | awk '$3 < 5'
+```
