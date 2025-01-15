@@ -26,6 +26,6 @@ source ~/software/miniconda3/etc/profile.d/conda.sh
 conda activate checkm2
 
 ####### Run your script #########################
-~/software/checkm2/bin/checkm2 predict --threads 10 --input ../All_bins --output Output \
---database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd
+~/software/checkm2/bin/checkm2 predict --threads 10 --input ../All_bins/*.fa --output-directory Output \
+--database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
 ```
