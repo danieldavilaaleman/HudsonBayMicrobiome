@@ -1,4 +1,6 @@
 # Binning tools implemented 
+The output of the Megahit Co-assembly of the 18 enrichments and the single-enrichmet assemblies are the target of the binning into MAGs.
+
 For Binning the output of MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), 
 and [MetaDecoder](https://github.com/liu-congcong/MetaDecoder).
 
