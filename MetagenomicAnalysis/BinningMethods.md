@@ -63,6 +63,32 @@ bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a final.contigs_1000.fa
 -o comebine.coassembly.bamfiles -f _R1.fastq -r _R2.fastq R3_E1_qc_R* -t 40 -m 50 -l 1000
 ```
 
+After getting the *.bam* files, **COMEBin** command:
+
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --time=08:00:00
+#SBATCH --mem=50G
+#SBATCH --partition=bigmem
+#SBATCH --gres=gpu:1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+
+
+####### Set environment variables ###############
+source ~/software/miniconda3/etc/profile.d/conda.sh
+conda activate comebin
+
+####### Run your script #########################
+CUDA_VISIBLE_DEVICES=0 bash COMEBin/bin/run_comebin.sh -a final.contigs_1000.fa \
+-p comebine.coassembly.bamfiles/work_files/ \
+-o COMEBin_output \
+-n 6 \
+-t 48
+```
+
+
 
 
 
