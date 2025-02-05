@@ -41,7 +41,7 @@ The python filter script generates `contig_lengrh_filter1000.txt` with the list 
 
 Final.contigs_1000.fa contains ***110,949 contigs.***
 
-The next step was to generate *.bam* files of each sample fastq files to the final.contigs_1000.fa
+The next step was to generate *.bam* files of each sample fastq files to the filtered Co-Assembly fasta file **final.contigs_1000.fa**
 
 ```
 #!/bin/bash
@@ -63,7 +63,7 @@ bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a final.contigs_1000.fa
 -o comebine.coassembly.bamfiles -f _R1.fastq -r _R2.fastq R3_E1_qc_R* -t 40 -m 50 -l 1000
 ```
 
-After getting the *.bam* files, **COMEBin** command:
+After getting all the *.bam* files (mapping each sample read pairs to the filtered co-assembly), **COMEBin** command:
 
 ```
 #!/bin/bash
