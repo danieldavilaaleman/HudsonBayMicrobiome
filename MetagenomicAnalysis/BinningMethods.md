@@ -13,7 +13,7 @@ conda create -n pytorch
 conda activate pytorch
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge pytorch python=3.7.12
 CONDA_OVERRIDE_CUDA="12.2" mamba install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
-CONDA_OVERRIDE_CUDA="12.2" mamba install pytorch==1.10.2 -c pytorch
+CONDA_OVERRIDE_CUDA="12.2" mamba install pytorch==1.10.2 -c pytorch  ## REALLY Important that CUDA version and not cpu version of pytorch is installed
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c bioconda comebin
 ```
 
