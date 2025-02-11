@@ -177,6 +177,22 @@ SemiBin2 single_easy_bin --environment ocean \
 -o $SCRATCH/SemiBin2.output
 ```
 
+The output of SemiBin2 was:
+
+```
+[2025-02-11 13:55:31,089] INFO: Setting number of CPUs to 80
+[2025-02-11 13:55:31,089] INFO: Binning for short_read
+[2025-02-11 13:56:05,079] INFO: Running with GPU.
+[2025-02-11 13:56:08,545] INFO: Generating training data...
+[2025-02-11 14:06:51,933] INFO: Calculating coverage for every sample.
+[2025-02-11 14:51:49,038] INFO: Processed: /scratch/33830640/allEnrichMappedCoassembly.bam
+[2025-02-11 14:52:15,678] INFO: Start binning.
+[2025-02-11 14:56:24,343] INFO: Number of bins prior to reclustering: 141
+[2025-02-11 14:56:27,093] INFO: Running naive ORF finder
+[2025-02-11 15:08:39,566] INFO: Number of bins after reclustering: 146
+[2025-02-11 15:08:39,727] INFO: Binning finished
+```
+
 
 # MetaDecoder
 
