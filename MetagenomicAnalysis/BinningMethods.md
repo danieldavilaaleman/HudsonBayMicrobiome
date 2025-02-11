@@ -146,7 +146,39 @@ conda activate semibin
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c pytorch pytorch python=3.9
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c bioconda semibin=2.1.0 # I have to specify the version of SemiBin, if not downgrade Semibin to version 0.2
 ```
+To run SemiBin2:
+```
+#!/bin/bash
+####### Reserve computing resources #############
+#SBATCH --time=03:00:00
+#SBATCH --mem=20G
+#SBATCH --partition=gpu-v100
+#SBATCH --gres=gpu:1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
 
+####### Set environment variables ###############
+WORKDIR=`pwd`
+SCRATCH=/scratch/$SLURM_JOBID
+
+cd $SCRATCH
+
+source ~/software/miniconda3/etc/profile.d/conda.sh
+conda activate semibin
+nvidia-smi
+
+####### Run your script #########################
+samtools merge $SCRATCH/allEnrichMappedCoassembly.bam $WORKDIR/comebine.coassembly.bamfiles/work_files/*bam
+
+SemiBin2 single_easy_bin --environment ocean \
+-i $WORKDIR/final.contigs_1000.fa \
+-b $SCRATCH/allEnrichMappedCoassembly.bam \
+-o $SCRATCH/SemiBin2.output
+```
+
+
+# MetaDecoder
 
 
 
