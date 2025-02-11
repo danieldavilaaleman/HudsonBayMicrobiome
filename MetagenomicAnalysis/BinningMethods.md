@@ -180,6 +180,15 @@ SemiBin2 single_easy_bin --environment ocean \
 
 # MetaDecoder
 
+To install metadecoder, a conda environment was created using:
+
+```
+conda create -n metadecoder
+conda activate metadecoder
+mamba install python=3.9 numpy scipy scikit-learn threadpoolctl
+pip3 install -U https://github.com/liu-congcong/MetaDecoder/releases/download/v1.1.0/metadecoder-1.1.0-py3-none-any.whl
+pip3 install cupy-cuda101
+```
 
 
 
