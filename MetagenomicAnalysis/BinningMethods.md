@@ -135,6 +135,18 @@ run_comebin.sh -a final.contigs_1000.fa \
 ```
 
 
+# SemiBin2
+
+### Installation
+Followed the same approach as before with COMEBin
+
+```
+conda create -n semibin
+conda activate semibin
+CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c pytorch pytorch python=3.9
+CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c bioconda semibin=2.1.0 # I have to specify the version of SemiBin, if not downgrade Semibin to version 0.2
+```
+
 
 
 
