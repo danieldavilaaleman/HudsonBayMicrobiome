@@ -264,5 +264,7 @@ metadecoder cluster -f $WORKDIR/final.contigs_1000.fa -c $SCRATCH/metadecoder.co
 
 MetaDecoder identified **139 bins!**
 
+# DasTool
 
+The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool)
 
