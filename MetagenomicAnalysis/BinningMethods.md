@@ -266,5 +266,22 @@ MetaDecoder identified **139 bins!**
 
 # DasTool
 
-The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool)
+The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool).
+
+### Installation 
+
+```
+conda create -n dastool -c bioconda das_tool
+das_tool version 1.1.7-1 has been successfully installed!                                                                                                
+                                                                                                                                                         
+This version uses DIAMOND as default alignment tool. As an alternative, USEARCH can be installed from the following links                                
+                                                                                                                                                         
+ > Download: http://www.drive5.com/usearch/download.html                                                                                                 
+ > Installation instruction: http://www.drive5.com/usearch/manual/install.html                                                                           
+                                                                                                                                                         
+                                                                                                                                                         
+done
+```
+
+
 
