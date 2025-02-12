@@ -262,7 +262,7 @@ metadecoder cluster -f $WORKDIR/final.contigs_1000.fa -c $SCRATCH/metadecoder.co
 
 ##### NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod -R 777 miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder``` and that solved the problem.
 
-
+MetaDecoder identified **139 bins!**
 
 
 
