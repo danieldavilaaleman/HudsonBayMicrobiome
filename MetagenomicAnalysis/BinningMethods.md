@@ -134,6 +134,23 @@ run_comebin.sh -a final.contigs_1000.fa \
 -t 48
 ```
 
+Increasing the memory to 300 Gb solve the issue and finish the pipeline
+
+COMEBin results:
+
+```
+Run unitem profile:	77
+
+Followed by CheckM and then:
+
+2025-02-11 18:14:23,074 - Final result:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/cluster_res/Leiden_bandwidth_0.1_res_maxedges100respara_5_partgraph_ratio_80.tsv
+2025-02-11 18:14:23,075 - Processing file:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/final.contigs_1000.fa
+2025-02-11 18:14:23,474 - Reading Map:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/cluster_res/Leiden_bandwidth_0.1_res_maxedges100respara_5_partgraph_ratio_80.tsv
+Processing file:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/final.contigs_1000.fa
+Reading Map:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/cluster_res/Leiden_bandwidth_0.1_res_maxedges100respara_5_partgraph_ratio_80.tsv.filtersmallbins_200000.tsv
+Writing bins:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/comebin_res_bins
+```
+
 
 # SemiBin2
 
