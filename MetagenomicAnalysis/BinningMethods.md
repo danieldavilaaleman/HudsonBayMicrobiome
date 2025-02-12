@@ -151,6 +151,7 @@ Reading Map:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/
 Writing bins:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/comebin_res_bins
 ```
 
+The total number of bins in ```/COMEBin_output/comebin_res/comebin_res_bins``` is ** 218 **
 
 # SemiBin2
 
