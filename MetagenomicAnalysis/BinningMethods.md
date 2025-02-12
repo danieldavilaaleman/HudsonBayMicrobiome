@@ -317,6 +317,10 @@ DAS_Tool -i COMEBin.contigs2bin.tsv,SemiBin2.contigs2bin.tsv,MetaDecoder.contigs
 -l COMEBin,SemiBin2,MetaDecoder -t 40 -c $WORKDIR/final.contigs_1000.fa  -o DasTool.output
 ```
 
+NOTE"
+```
+for file in *.fa; do echo $file; mv $file contig.$file ; done
+```
 
 
 
