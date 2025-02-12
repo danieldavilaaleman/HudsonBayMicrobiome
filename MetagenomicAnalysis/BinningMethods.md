@@ -260,7 +260,7 @@ metadecoder cluster -f $WORKDIR/final.contigs_1000.fa -c $SCRATCH/metadecoder.co
 -s $SCRATCH/metadecoder.seed -o $SCRATCH/metadecoder.bins
 ```
 
-## NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod 777 /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` and that solved the problem.
+#### NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod 777 /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` and that solved the problem.
 
 
 
