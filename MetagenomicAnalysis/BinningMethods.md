@@ -114,7 +114,7 @@ After getting all the *.bam* files (mapping each sample read pairs to the filter
 #!/bin/bash
 ####### Reserve computing resources #############
 #SBATCH --time=12:00:00
-#SBATCH --mem=50G
+#SBATCH --mem=300G  # Need to increase the memory, if not is going to stuck 
 #SBATCH --partition=bigmem
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
