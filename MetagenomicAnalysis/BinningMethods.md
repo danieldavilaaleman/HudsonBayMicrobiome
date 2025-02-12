@@ -253,13 +253,14 @@ nvidia-smi
 metadecoder coverage -b $WORKDIR/comebine.coassembly.bamfiles/work_files/*.bam -o $SCRATCH/metadecoder.coverage
 
 # Step 2 - Map Single-copy marker genes to the assembly
-metadecoder seed --threads 50 -f $WORKDIR/final.contigs_1000.fa -o $SCRATCH/metadecoder.seed
+metadecoder seed --threads 50 -f $WORKDIR/final.contigs_1000.fa -o $SCRATCH/metadecoder.seedsolved 
 
 #Step 3 - Run Metadecoder algorithm to cluster contigs
 metadecoder cluster -f $WORKDIR/final.contigs_1000.fa -c $SCRATCH/metadecoder.coverage \
 -s $SCRATCH/metadecoder.seed -o $SCRATCH/metadecoder.bins
 ```
 
+## NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod 777 /home/franciscodaniel.davi/software/miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` and that solved the problem.
 
 
 
