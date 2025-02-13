@@ -28,7 +28,7 @@ The output of the test should be ```CUDA is available```
 
 ### Pre-processing
 
-1. Using `COMEBin/scripts/gen_cov_file.sh` to generate coverage information. Coverage information is required as input for COMEBin (-p). The input is the assembly file, followed by the reads of all of the samples that went into the assmebly. **NOTE: that the output are sorted bam files, whichc can be used in SemiBin2 and MEtaDecoder**
+Using `COMEBin/scripts/gen_cov_file.sh` to generate coverage information. Coverage information is required as input for COMEBin (-p). The input is the assembly file, followed by the reads of all of the samples that went into the assmebly. **NOTE: that the output are sorted bam files, whichc can be used in SemiBin2 and MEtaDecoder**
 
 Single-enriched assemblies and the co-assembly of the 18 enrichments were binned independently using COMEBin. Starting with the co-assembly:
 
