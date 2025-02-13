@@ -16,7 +16,6 @@ After installation, I ran CheckM2 for all bins created previously with MetaBat2
 #SBATCH --time=04:00:00
 #SBATCH --mem=50G
 #SBATCH --partition=bigmem
-#SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
