@@ -9,33 +9,28 @@ mamba env create -n checkm2 -f checkm2.yml
 conda activate checkm2
 ```
 
-After installation, I ran CheckM2 for all bins created previously with MetaBat2
+After installation, CheckM2 was run for all the DasTool bins using ```script/run_checkm2.sbatch```
+
+CheckM2 output:
+
 ```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=04:00:00
-#SBATCH --mem=50G
-#SBATCH --partition=bigmem
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-
-####### Set environment variables ###############
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate checkm2
-
-####### Run your script #########################
-~/software/checkm2/bin/checkm2 predict --threads 20 --input ../All_bins/*.fa --output-directory Output \
---database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
+[02/13/2025 10:25:35 AM] INFO: Running CheckM2 version 1.0.2
+[02/13/2025 10:25:35 AM] INFO: Custom database path provided for predict run. Checking database at //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd...
+[02/13/2025 10:25:50 AM] INFO: Running quality prediction workflow with 20 threads.
+[02/13/2025 10:26:02 AM] INFO: Calling genes in 59 bins with 20 threads:
+    Finished processing 59 of 59 (100.00%) bins.
+[02/13/2025 10:28:38 AM] INFO: Calculating metadata for 59 bins with 20 threads:
+    Finished processing 59 of 59 (100.00%) bin metadata.
+[02/13/2025 10:28:39 AM] INFO: Annotating input genomes with DIAMOND using 20 threads
+[02/13/2025 10:46:30 AM] INFO: Processing DIAMOND output
+[02/13/2025 10:46:31 AM] INFO: Predicting completeness and contamination using ML models.
+[02/13/2025 10:46:43 AM] INFO: Parsing all results and constructing final output table.
+[02/13/2025 10:46:43 AM] INFO: CheckM2 finished successfully.
 ```
-
-[01/15/2025 11:38:24 AM] INFO: CheckM2 finished successfully.
-
-I created a softlink for GENICE directory using ```ln -s //work/ebg_gm/gm/GENICE/M_Bautista/maria/GENICE``` - So the output of CheckM2 is on ```/home/franciscodaniel.davi/genice/Binning_MetaBAT2/CheckM2_allBins/Output```
 
 To count the number of "Medium Quality" MAGs >70% completenes and < 5% contamination, I used:
 ```
 cat quality_report.tsv | awk '$2 > 70' | awk '$3 < 5'
 ```
 
-CheckM2 analysis returned ***150*** Medium quality MAGs
+CheckM2 analysis returned ***30*** Medium quality MAGs
