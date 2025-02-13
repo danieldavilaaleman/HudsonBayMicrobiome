@@ -314,10 +314,10 @@ Fasta_to_Contig2Bin.sh -i $WORKDIR/metadecoder.output.bins -e fasta > MetaDecode
 
 #### Step 2 - Running Das_Tool
 DAS_Tool -i COMEBin.contigs2bin.tsv,SemiBin2.contigs2bin.tsv,MetaDecoder.contigs2bin.tsv \
--l COMEBin,SemiBin2,MetaDecoder -t 40 -c $WORKDIR/final.contigs_1000.fa  -o DasTool.output
+-l COMEBin,SemiBin2,MetaDecoder -t 40 -c $WORKDIR/final.contigs_1000.fa  -o DasTool.output --debug --write_bins --write_bin_evals
 ```
 
-NOTE"
+NOTE" DAS_Tool can not use number as name of the bin (COMEBin), so the name of the bin was changed inside COMEBin bin directory as follow:
 ```
 for file in *.fa; do echo $file; mv $file contig.$file ; done
 ```
