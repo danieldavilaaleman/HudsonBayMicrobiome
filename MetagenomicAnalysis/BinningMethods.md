@@ -22,119 +22,29 @@ Then, I requested and interactive GPU environment to test that CUDA was succesfu
 salloc -N1 -n1 -c4 --mem=25gb --gres=gpu:1 -p bigmem -t 00:10:00
 ```
 
-Then crete a python file using nano (est.cuda.gpu.py):
-
-```
-#! /usr/bin/env python 
-# -------------------------------------------------------
-import torch
-# -------------------------------------------------------
-print("Defining torch tensors:")
-x = torch.Tensor(5, 3)
-print(x)
-y = torch.rand(5, 3)
-print(y)
-
-# -------------------------------------------------------
-# let us run the following only if CUDA is available
-if torch.cuda.is_available():
-    print("CUDA is available.")
-    x = x.cuda()
-    y = y.cuda()
-    print(x + y)
-else:
-    print("CUDA is NOT available.")
-
-# -------------------------------------------------------
-```
+Then crete a python file using nano ```scripts/test.cuda.gpu.py```
 
 The output of the test should be ```CUDA is available```
 
-### Preprocessing
+### Pre-processing
 
 1. Using `COMEBin/scripts/gen_cov_file.sh` to generate coverage information. Coverage information is required as input for COMEBin (-p). The input is the assembly file, followed by the reads of all of the samples that went into the assmebly. **NOTE: that the output are sorted bam files, whichc can be used in SemiBin2 and MEtaDecoder**
 
 Single-enriched assemblies and the co-assembly of the 18 enrichments were binned independently using COMEBin. Starting with the co-assembly:
 
-First step is to remove the contigs lower than 1,000 bp using the auxiliary scripts in `COMEBin/scripts` followed by generating .bam files required for COMEBin:
+First step is to remove the contigs lower than 1,000 bp using the auxiliary scripts in `COMEBin/scripts` followed by generating .bam files required for COMEBin. 
+```scripts/run_preprocessing_comebin.sbatch```
 
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=04:00:00
-#SBATCH --mem=50G
-#SBATCH --partition=bigmem
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-
-####### Set environment variables ###############
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate pytorch
-
-####### Run your script #########################
-python ~/software/COMEBin/COMEBin/scripts/Filter_tooshort.py ../MegaHIT_Coassembly/All_Coassembly_megahit_out/final.contigs.fa 1000
-
-# COMEBin bam generation files for binning. I copied and unzip fastq.gz files of the reads for this command.
-bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a final.contigs_1000.fa \
--o comebine.coassembly.bamfiles -f _R1.fastq -r _R2.fastq *fastq -t 20 -m 45 -l 1000
-
-```
-
-The python filter script generates `contig_lengrh_filter1000.txt` with the list of contiguous name and length, and the file `final.contigs_1000.fa` that is the input to generate bam file.
+The python filter script generates ```contig_lengrh_filter1000.txt``` with the list of contiguous name and length, and the file ```final.contigs_1000.fa``` that is the input to generate bam file.
 
 Final.contigs_1000.fa contains ***110,949 contigs.***
 
 The next step was to generate *.bam* files of each sample fastq files to the filtered Co-Assembly fasta file **final.contigs_1000.fa**
+```scripts/run_mapping_comebin.sbatch```
 
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=08:00:00
-#SBATCH --mem=50G
-#SBATCH --partition=bigmem
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
+After getting all the *.bam* files (mapping each sample read pairs to the filtered co-assembly), **COMEBin** binning was run using ```scripts/run_binning_comebin.sbatch```
 
-####### Set environment variables ###############
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate comebin
-
-####### Run your script #########################
-#python ~/software/COMEBin/COMEBin/scripts/Filter_tooshort.py ../MegaHIT_Coassembly/All_Coassembly_megahit_out/final.contigs.fa 1000
-
-bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a final.contigs_1000.fa \
--o comebine.coassembly.bamfiles -f _R1.fastq -r _R2.fastq R3_E1_qc_R* -t 40 -m 50 -l 1000
-```
-
-After getting all the *.bam* files (mapping each sample read pairs to the filtered co-assembly), **COMEBin** command:
-
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=12:00:00
-#SBATCH --mem=300G  # Need to increase the memory, if not is going to stuck 
-#SBATCH --partition=bigmem
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=5
-
-####### Set environment variables ###############
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate pytorch
-nvidia-smi
-
-####### Run your script #########################
-run_comebin.sh -a final.contigs_1000.fa \
--p comebine.coassembly.bamfiles/work_files/ \
--o COMEBin_output \
--n 6 \
--t 48
-```
-
-Increasing the memory to 300 Gb solve the issue and finish the pipeline
+***Note***: Increasing the memory to 300 Gb solve the issue that Comebin pipeline stuck and finish the pipeline
 
 COMEBin results:
 
@@ -164,36 +74,7 @@ conda activate semibin
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c pytorch pytorch python=3.9
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c bioconda semibin=2.1.0 # I have to specify the version of SemiBin, if not downgrade Semibin to version 0.2
 ```
-To run SemiBin2:
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=03:00:00
-#SBATCH --mem=20G
-#SBATCH --partition=gpu-v100
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-
-####### Set environment variables ###############
-WORKDIR=`pwd`
-SCRATCH=/scratch/$SLURM_JOBID
-
-cd $SCRATCH
-
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate semibin
-nvidia-smi
-
-####### Run your script #########################
-samtools merge $SCRATCH/allEnrichMappedCoassembly.bam $WORKDIR/comebine.coassembly.bamfiles/work_files/*bam
-
-SemiBin2 single_easy_bin --environment ocean \
--i $WORKDIR/final.contigs_1000.fa \
--b $SCRATCH/allEnrichMappedCoassembly.bam \
--o $SCRATCH/SemiBin2.output
-```
+To run SemiBin2, ```scripts/run_semibin.sbatch```
 
 The output of SemiBin2 was:
 
@@ -224,41 +105,7 @@ pip3 install -U https://github.com/liu-congcong/MetaDecoder/releases/download/v1
 pip3 install cupy-cuda101
 ```
 
-Then, MetaDecoder was run using:
-
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=03:00:00
-#SBATCH --mem=20G
-#SBATCH --partition=gpu-v100
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-
-####### Set environment variables ###############
-WORKDIR=`pwd`
-SCRATCH=/scratch/$SLURM_JOBID
-
-cd $SCRATCH
-
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate metadecoder
-nvidia-smi
-
-####### Run your script #########################
-
-# Step 1 - Obtain the coverage of the contigs
-metadecoder coverage -b $WORKDIR/comebine.coassembly.bamfiles/work_files/*.bam -o $SCRATCH/metadecoder.coverage
-
-# Step 2 - Map Single-copy marker genes to the assembly
-metadecoder seed --threads 50 -f $WORKDIR/final.contigs_1000.fa -o $SCRATCH/metadecoder.seedsolved 
-
-#Step 3 - Run Metadecoder algorithm to cluster contigs
-metadecoder cluster -f $WORKDIR/final.contigs_1000.fa -c $SCRATCH/metadecoder.coverage \
--s $SCRATCH/metadecoder.seed -o $SCRATCH/metadecoder.bins
-```
+Then, MetaDecoder was run using ```scripts/run_metadecoder.sbatch```
 
 ##### NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod -R 777 miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder``` and that solved the problem.
 
@@ -283,39 +130,7 @@ This version uses DIAMOND as default alignment tool. As an alternative, USEARCH 
 done
 ```
 ### Preparation of input files and running Das_Tool
-A contig-ID and bin-ID file for each bin set needs to be provided. The helper script ```Fasta_to_Contigs2Bin.sh``` was used for the generation of the input tabular files for Das_Tool
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=03:00:00
-#SBATCH --mem=30G
-#SBATCH --partition=bigmem
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=3
-
-####### Set environment variables ###############
-WORKDIR=`pwd`
-SCRATCH=/scratch/$SLURM_JOBID
-
-cd $SCRATCH
-
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate dastool
-
-####### Run your script #########################
-#### Step 1 - Obtain Fasta2Contigs2Bin tabular input for Das_Tools ####
-#COMEBin bins
-Fasta_to_Contig2Bin.sh -i $WORKDIR/comebin_res_bins -e fa > COMEBin.contigs2bin.tsv
-#SemiBin2 bins
-Fasta_to_Contig2Bin.sh -i $WORKDIR/SemiBin2_output_bins -e fa > SemiBin2.contigs2bin.tsv
-#MetaDecoder
-Fasta_to_Contig2Bin.sh -i $WORKDIR/metadecoder.output.bins -e fasta > MetaDecoder.contigs2bin.tsv
-
-#### Step 2 - Running Das_Tool
-DAS_Tool -i COMEBin.contigs2bin.tsv,SemiBin2.contigs2bin.tsv,MetaDecoder.contigs2bin.tsv \
--l COMEBin,SemiBin2,MetaDecoder -t 40 -c $WORKDIR/final.contigs_1000.fa  -o DasTool.output --debug --write_bins --write_bin_evals
-```
+A contig-ID and bin-ID file for each bin set needs to be provided. The helper script ```Fasta_to_Contigs2Bin.sh``` was used for the generation of the input tabular files for Das_Tool folowed by running DasTool ```scripts/run_dastool.sbatch```
 
 NOTE" DAS_Tool can not use number as name of the bin (COMEBin), so the name of the bin was changed inside COMEBin bin directory as follow:
 ```
