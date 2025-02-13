@@ -132,7 +132,7 @@ done
 ### Preparation of input files and running Das_Tool
 A contig-ID and bin-ID file for each bin set needs to be provided. The helper script ```Fasta_to_Contigs2Bin.sh``` was used for the generation of the input tabular files for Das_Tool folowed by running DasTool ```scripts/run_dastool.sbatch```
 
-NOTE" DAS_Tool can not use number as name of the bin (COMEBin), so the name of the bin was changed inside COMEBin bin directory as follow:
+***NOTE:*** DAS_Tool can not use number as name of the bin (COMEBin), so the name of the bin was changed inside COMEBin bin directory as follow:
 ```
 for file in *.fa; do echo $file; mv $file contig.$file ; done
 ```
