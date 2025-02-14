@@ -137,7 +137,11 @@ A contig-ID and bin-ID file for each bin set needs to be provided. The helper sc
 for file in *.fa; do echo $file; mv $file contig.$file ; done
 ```
 
-I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got 
+I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got **30 MAGs** Completeness > 70% Contamination < 5%
+
+## MetaWRAP
+The second option was refinning bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch```
+
 
 
 
