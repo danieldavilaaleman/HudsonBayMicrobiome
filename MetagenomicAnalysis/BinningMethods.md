@@ -137,6 +137,8 @@ A contig-ID and bin-ID file for each bin set needs to be provided. The helper sc
 for file in *.fa; do echo $file; mv $file contig.$file ; done
 ```
 
+I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got 
+
 
 
 
