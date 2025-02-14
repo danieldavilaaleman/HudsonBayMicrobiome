@@ -140,7 +140,7 @@ for file in *.fa; do echo $file; mv $file contig.$file ; done
 I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got **30 MAGs** Completeness > 70% Contamination < 5%
 
 ## MetaWRAP
-The second option was refinning bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch``` and got **44 MAGs** Completeness >70 % Contamination < 5 %
+The second option was refinning *COMEBin, SemiBin2, MetDecoder* bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch``` and got **44 MAGs** Completeness >70 % Contamination < 5 %.
 
 
 
