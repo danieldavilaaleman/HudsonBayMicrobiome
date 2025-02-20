@@ -9,7 +9,7 @@
 
 ####### Set environment variables ###############
 source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate comebin
+conda activate comebin_env
 
 ####### Run your script #########################
 #python ~/software/COMEBin/COMEBin/scripts/Filter_tooshort.py ../MegaHIT_Coassembly/All_Coassembly_megahit_out/final.contigs.fa 1000
