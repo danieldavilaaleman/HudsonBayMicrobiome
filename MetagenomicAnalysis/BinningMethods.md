@@ -111,6 +111,14 @@ Then, MetaDecoder was run using ```scripts/run_metadecoder.sbatch```
 
 MetaDecoder identified **139 bins!**
 
+# Metabinner
+
+The next tool implemented was [Metabinner](https://github.com/ziyewang/MetaBinner)
+
+### Pre-processing
+Generation of coverage and composition profiles
+
+
 # DasTool
 
 The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool). The output bins are dereplicated!
