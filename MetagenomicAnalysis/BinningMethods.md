@@ -132,6 +132,10 @@ source /global/software/bioconda/init-2024-10
 python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4
 ```
 
+### Output
+The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins```
+
+MetaBinner generates **46 bins**
 
 Before running MetaBinner, **metabinner.output** directory was created and then run binning tool using *run_metabinner.sbatch* 
 
