@@ -118,6 +118,11 @@ The next tool implemented was [Metabinner](https://github.com/ziyewang/MetaBinne
 ### Pre-processing
 Generation of coverage and composition profiles
 
+Generation of the coverage profiles were using the output of MaxBin2 from metaWRAP using filtered <1,000 contigs final assembly file.
+```
+ cp /scratch/33893094/initial_binning/work_files/mb2_master_depth.txt .
+cat mb2_master_depth.txt | cut -f -1,4- > coverage_profile.tsv
+```
 
 # DasTool
 
