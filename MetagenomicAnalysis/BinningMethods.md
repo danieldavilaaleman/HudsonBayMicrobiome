@@ -124,6 +124,18 @@ Generation of the coverage profiles were using the output of MaxBin2 from metaWR
 cat mb2_master_depth.txt | cut -f -1,4- > coverage_profile.tsv
 ```
 
+Generation of composition profile
+```
+module load python/3.12.5
+source /global/software/bioconda/init-2024-10
+
+python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4
+```
+
+
+Before running MetaBinner, **metabinner.output** directory was created and then run binning tool using *run_metabinner.sbatch* 
+
+
 # DasTool
 
 The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool). The output bins are dereplicated!
