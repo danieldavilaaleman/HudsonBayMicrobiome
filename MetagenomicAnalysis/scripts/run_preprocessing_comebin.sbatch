@@ -17,4 +17,4 @@ python ~/software/COMEBin/COMEBin/scripts/Filter_tooshort.py ../MegaHIT_Coassemb
 
 # COMEBin bam generation files for binning. I copied and unzip fastq.gz files of the reads for this command.
 bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a final.contigs_1000.fa \
--o comebine.coassembly.bamfiles -f _R1.fastq -r _R2.fastq *fastq -t 20 -m 45 -l 1000
+-o comebine.coassembly.bamfiles -t 40 -m 300 /scratch/33930474/*.fastq # fastq files need to be gunzip -d and with the name format _1.fastq (Clean fastq files from all Enrichment samples)
