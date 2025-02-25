@@ -61,7 +61,7 @@ Reading Map:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/
 Writing bins:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly/COMEBin_output/comebin_res/comebin_res_bins
 ```
 
-The total number of bins in ```/COMEBin_output/comebin_res/comebin_res_bins``` is **218!**
+The total number of bins in ```/COMEBin_output/comebin_res/comebin_res_bins``` is **235**
 
 # SemiBin2
 
@@ -88,28 +88,9 @@ The output of SemiBin2 was:
 [2025-02-11 14:52:15,678] INFO: Start binning.
 [2025-02-11 14:56:24,343] INFO: Number of bins prior to reclustering: 141
 [2025-02-11 14:56:27,093] INFO: Running naive ORF finder
-[2025-02-11 15:08:39,566] INFO: Number of bins after reclustering: 146
+[2025-02-11 15:08:39,566] INFO: Number of bins after reclustering: 144
 [2025-02-11 15:08:39,727] INFO: Binning finished
 ```
-
-
-# MetaDecoder
-
-To install metadecoder, a conda environment was created using:
-
-```
-conda create -n metadecoder
-conda activate metadecoder
-mamba install python=3.9 numpy scipy scikit-learn threadpoolctl
-pip3 install -U https://github.com/liu-congcong/MetaDecoder/releases/download/v1.1.0/metadecoder-1.1.0-py3-none-any.whl
-pip3 install cupy-cuda101
-```
-
-Then, MetaDecoder was run using ```scripts/run_metadecoder.sbatch```
-
-##### NOTE: I encountered an error during ```metadecoder seed``` due to restrcition permission in ``` miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder/fraggenescan``` so the following step was ```chmod -R 777 miniconda3/envs/metadecoder/lib/python3.9/site-packages/metadecoder``` and that solved the problem.
-
-MetaDecoder identified **139 bins!**
 
 # Metabinner
 
@@ -135,7 +116,7 @@ python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4
 ### Output
 The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins```
 
-MetaBinner generates **46 bins**
+MetaBinner generates **81 bins**
 
 Before running MetaBinner, **metabinner.output** directory was created and then run binning tool using *run_metabinner.sbatch* 
 
@@ -169,7 +150,7 @@ for file in *.fa; do echo $file; mv $file contig.$file ; done
 I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got **30 MAGs** Completeness > 70% Contamination < 5%
 
 ## MetaWRAP
-The second option was refinning *COMEBin, SemiBin2, MetDecoder* bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch``` and got **44 MAGs** Completeness > 70 % Contamination < 5 %.
+The second option was refinning *COMEBin, SemiBin2, MetaBinner* bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch``` and got **44 MAGs** Completeness > 70 % Contamination < 5 %.
 
 
 
