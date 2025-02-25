@@ -13,15 +13,18 @@ SCRATCH=/scratch/$SLURM_JOBID
 
 cd $SCRATCH
 
-#module load python/3.12.5
-#source /global/software/bioconda/init-2024-10
+module load python/3.12.5
+source /global/software/bioconda/init-2024-10
 
-#python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4 $SCRATCH/
+bash ~/software/miniconda3/envs/metabinner/bin/scripts/gen_coverage_file.sh -a $WORKDIR/final.contigs_1000.fa \
+-o output_coverage -t 40 -m 80 /scratch/33930474/*.fastq # fastq files need to be gunzip -d and with the name format _1.fastq (clean fastq files from all enrichment samples)
+
+python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4 $SCRATCH/
 
 source ~/software/miniconda3/etc/profile.d/conda.sh
 conda activate metabinner
 
 ####### Run your script #########################
-bash run_metabinner.sh -a $WORKDIR/final.contigs_1000.fa -o $WORKDIR/metabinner.output -d $WORKDIR/metaBinner.coverage_profile.tsv \
+bash run_metabinner.sh -a $WORKDIR/final.contigs_1000.fa -o $WORKDIR/metabinner.output -d $WORKDIR/metaBinner.coverage_profile_f1k.tsv \
 -k $WORKDIR/final.contigs_1000_kmer_4_f1000.csv -t 40 -s huge \
 -p ~/software/miniconda3/envs/metabinner/bin
