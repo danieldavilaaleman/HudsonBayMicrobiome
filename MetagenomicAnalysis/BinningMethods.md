@@ -4,10 +4,11 @@ The output of the Megahit Co-assembly of the 18 enrichments and the single-enric
 For Binning the output of MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/liu-congcong/MetaDecoder).
 
 ## COMEBIN
-### Preprocessing of Assembly data
-Conda environment for COMEBin was created following installation instrictions [here](https://github.com/ziyewang/COMEBin). With a few modifications:
 
 ### Installation
+
+Conda environment for COMEBin was created following installation instrictions [here](https://github.com/ziyewang/COMEBin). With a few modifications:
+
 ```
 conda create -n pytorch
 conda activate pytorch
@@ -28,7 +29,7 @@ The output of the test should be ```CUDA is available```
 
 ### Pre-processing
 
-Using `COMEBin/scripts/gen_cov_file.sh` to generate coverage information. Coverage information is required as input for COMEBin (-p). The input is the assembly file, followed by the reads of all of the samples that went into the assmebly. **NOTE: that the output are sorted bam files, whichc can be used in SemiBin2 and MEtaDecoder**
+Using `COMEBin/scripts/gen_cov_file.sh` to generate coverage information. Coverage information is required as input for COMEBin (-p). The input is the assembly file, followed by the reads of all of the samples that went into the assmebly. **NOTE: that the output are sorted bam files, whichc can be used in SemiBin2**
 
 Single-enriched assemblies and the co-assembly of the 18 enrichments were binned independently using COMEBin. Starting with the co-assembly:
 
@@ -42,7 +43,7 @@ Final.contigs_1000.fa contains ***110,949 contigs.***
 The next step was to generate *.bam* files of each sample fastq files to the filtered Co-Assembly fasta file **final.contigs_1000.fa**
 ```scripts/run_mapping_comebin.sbatch```
 
-After getting all the *.bam* files (mapping each sample read pairs to the filtered co-assembly), **COMEBin** binning was run using ```scripts/run_binning_comebin.sbatch```
+After getting all the sorted *.bam* files (mapping each sample read pairs to the filtered co-assembly - COMEBin sort *bam* files), **COMEBin** binning was run using ```scripts/run_binning_comebin.sbatch```
 
 ***Note***: Increasing the memory to 300 Gb solve the issue that Comebin pipeline stuck and finish the pipeline
 
@@ -74,7 +75,9 @@ conda activate semibin
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c pytorch pytorch python=3.9
 CONDA_OVERRIDE_CUDA="12.2" mamba install -c conda-forge -c bioconda semibin=2.1.0 # I have to specify the version of SemiBin, if not downgrade Semibin to version 0.2
 ```
-To run SemiBin2, ```scripts/run_semibin.sbatch```
+
+### Pre-processing
+The 18 Sorted *bam* files created during COMEBin pre-processing, were merged using ***samtools*** and then used as -b parameter in SemiBin2 (To run SemiBin2, ```scripts/run_semibin.sbatch```). Filtered contig file <1Kb was used as -a parameter.
 
 The output of SemiBin2 was:
 
@@ -97,7 +100,7 @@ The output of SemiBin2 was:
 The next tool implemented was [Metabinner](https://github.com/ziyewang/MetaBinner)
 
 ### Pre-processing
-Generation of coverage and composition profiles
+Generation of coverage and composition profiles was using ```MetaBinner/scripts```
 
 Generation of the coverage profiles were using the output of MaxBin2 from metaWRAP using filtered <1,000 contigs final assembly file.
 ```
