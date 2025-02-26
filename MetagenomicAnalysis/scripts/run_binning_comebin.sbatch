@@ -21,7 +21,7 @@ nvidia-smi
 ####### Run your script #########################
 #### Pre-processing ####
 cp $WORKDIR/final.contigs_1000.fa .
-#bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a $SCRATCH/final.contigs_1000.fa \
+bash ~/software/COMEBin/COMEBin/scripts/gen_cov_file.sh -a $SCRATCH/final.contigs_1000.fa \
 -o comebine.coassembly.bamfile -t 40 -m 300 /scratch/33930474/*.fastq # fastq files need to be gunzip -d and with the name format _1.fastq (map all clean reads individually
 # to the assembly to generate 18 sorted bam files which will be the -p attribute in run_comebin.sh)
 
