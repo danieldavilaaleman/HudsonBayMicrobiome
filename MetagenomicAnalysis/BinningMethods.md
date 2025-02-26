@@ -124,7 +124,7 @@ For bin refinement, the module bin_refinement from [metaWRAP](https://github.com
 The output of ***metaWRAP*** for the **Co-Assembly MAGs**: 85 bins
 
 # QC using CheckM2
-The QC of the obtained 85 bins were performed using [checkM2](https://github.com/chklovski/CheckM2) with ```scripts/run_checkm2.sbatch```
+The QC of the obtained 85 bins from *bin_refinement module of metaWRAP* were performed using [checkM2](https://github.com/chklovski/CheckM2) with ```scripts/run_checkm2.sbatch```. The output is:
 
 | Quality| Number of Bins |
 |------- | --------------- |
