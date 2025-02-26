@@ -111,7 +111,7 @@ source /global/software/bioconda/init-2024-10
 
 python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4
 ```
-Before running MetaBinner, **metabinner.output** directory was created and then run MetaBinner tool using ```script/run_metabinner.sbatch```
+Before running MetaBinner, **metabinner.output** directory was created and then run MetaBinner tool using ```scripts/run_metabinner.sbatch```
 
 ### Output
 The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins```
@@ -119,12 +119,12 @@ The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/g
 MetaBinner generates **81 bins**
 
 # Bin Refinement
-For bin refinement, the module bin_refinement from [metaWRAP](https://github.com/bxlab/metaWRAP) was implemented using the output bins obtained from [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/ziyewang/MetaBinner) using ```script/run_metawrap.sbatch```.
+For bin refinement, the module bin_refinement from [metaWRAP](https://github.com/bxlab/metaWRAP) was implemented using the output bins obtained from [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/ziyewang/MetaBinner) using ```scripts/run_metawrap.sbatch```.
 
 The output of ***metaWRAP*** for the **Co-Assembly MAGs**: 85 bins
 
 # QC using CheckM2
-The QC of the obtained 85 bins were performed using [checkM2](https://github.com/chklovski/CheckM2) with ```script/run_checkm2.sbatch```
+The QC of the obtained 85 bins were performed using [checkM2](https://github.com/chklovski/CheckM2) with ```scripts/run_checkm2.sbatch```
 
 | Quality| Number of Bins |
 |------- | --------------- |
