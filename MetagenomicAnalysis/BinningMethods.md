@@ -1,7 +1,7 @@
 # Binning tools implemented 
 The output of the Megahit Co-assembly of the 18 enrichments and the single-enrichmet assemblies are the target of the binning into MAGs.
 
-For Binning the output of MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/liu-congcong/MetaDecoder).
+For Binning the output of MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaBinner](https://github.com/ziyewang/MetaBinner).
 
 ## COMEBIN
 
@@ -102,61 +102,40 @@ The next tool implemented was [Metabinner](https://github.com/ziyewang/MetaBinne
 ### Pre-processing
 Generation of coverage and composition profiles was using ```MetaBinner/scripts```
 
-Generation of the coverage profiles were using the output of MaxBin2 from metaWRAP using filtered <1,000 contigs final assembly file.
-```
- cp /scratch/33893094/initial_binning/work_files/mb2_master_depth.txt .
-cat mb2_master_depth.txt | cut -f -1,4- > coverage_profile.tsv
-```
+Generation of the coverage profiles were using the gen_cov_file.sh from Metabinner on the filtered <1,000 contigs final assembly file. This generated 18 sorted bam files and the coverage file ```metaBinner.coverage_profile_f1k.tsv```.
 
-Generation of composition profile
+Generation of composition profile was created using ```gen_kmer.py``` where ```k = 4```
 ```
 module load python/3.12.5
 source /global/software/bioconda/init-2024-10
 
 python $WORKDIR/gen_kmer.py $WORKDIR/final.contigs_1000.fa 1000 4
 ```
+Before running MetaBinner, **metabinner.output** directory was created and then run MetaBinner tool using ```script/run_metabinner.sbatch```
 
 ### Output
 The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins```
 
 MetaBinner generates **81 bins**
 
-Before running MetaBinner, **metabinner.output** directory was created and then run binning tool using *run_metabinner.sbatch* 
+# Bin Refinement
+For bin refinement, the module bin_refinement from [metaWRAP](https://github.com/bxlab/metaWRAP) was implemented using the output bins obtained from [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/ziyewang/MetaBinner) using ```script/run_metawrap.sbatch```.
+
+The output of ***metaWRAP*** for the **Co-Assembly MAGs**: 85 bins
+
+# QC using CheckM2
+The QC of the obtained 85 bins were performed using [checkM2](https://github.com/chklovski/CheckM2) with ```script/run_checkm2.sbatch```
+
+| Quality| Number of Bins |
+|------- | --------------- |
+|>50 comp / <10 cont| 82 |
+|>70 comp / <5 cont| 52 |
+|>90 comp / <5 cont| 24 |
+
+# Remove contamination in obtained bins
 
 
-# DasTool
-
-The next step is binning refinement of the three different bin sets using [DasTool](https://github.com/cmks/DAS_Tool). The output bins are dereplicated!
-
-### Installation 
-
-```
-conda create -n dastool -c bioconda das_tool
-das_tool version 1.1.7-1 has been successfully installed!                                                                                                
-                                                                                                                                                         
-This version uses DIAMOND as default alignment tool. As an alternative, USEARCH can be installed from the following links                                
-                                                                                                                                                         
- > Download: http://www.drive5.com/usearch/download.html                                                                                                 
- > Installation instruction: http://www.drive5.com/usearch/manual/install.html                                                                           
-                                                                                                                                                         
-                                                                                                                                                         
-done
-```
-### Preparation of input files and running Das_Tool
-A contig-ID and bin-ID file for each bin set needs to be provided. The helper script ```Fasta_to_Contigs2Bin.sh``` was used for the generation of the input tabular files for Das_Tool folowed by running DasTool ```scripts/run_dastool.sbatch```
-
-***NOTE:*** DAS_Tool can not use number as name of the bin (COMEBin), so the name of the bin was changed inside COMEBin bin directory as follow:
-```
-for file in *.fa; do echo $file; mv $file contig.$file ; done
-```
-
-I sed **CheckM2** for checking the HQ MAGs resulted from DASTool and got **30 MAGs** Completeness > 70% Contamination < 5%
-
-## MetaWRAP
-The second option was refinning *COMEBin, SemiBin2, MetaBinner* bins using ```metawrap refinement``` module using ```script/run_metawrap.sbatch``` and got **44 MAGs** Completeness > 70 % Contamination < 5 %.
-
-
-
+# Binning of single 18 enrichment metagenomic assemblies
 
 
 
