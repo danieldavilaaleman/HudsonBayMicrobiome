@@ -128,9 +128,9 @@ The QC of the obtained 85 bins were performed using [checkM2](https://github.com
 
 | Quality| Number of Bins |
 |------- | --------------- |
-|>50 comp / <10 cont| 82 |
-|>70 comp / <5 cont| 52 |
-|>90 comp / <5 cont| 24 |
+|>50 comp  <10 cont| 82 |
+|>70 comp  <5 cont| 52 |
+|>90 comp  <5 cont| 24 |
 
 # Remove contamination in obtained bins
 
