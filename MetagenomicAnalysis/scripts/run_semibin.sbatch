@@ -1,12 +1,11 @@
 #!/bin/bash
 ####### Reserve computing resources #############
-#SBATCH --time=03:00:00
-#SBATCH --mem=20G
-#SBATCH --partition=gpu-v100
-#SBATCH --gres=gpu:1
+#SBATCH --time=23:00:00
+#SBATCH --mem=150G
+#SBATCH --partition=bigmem
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=40
 
 ####### Set environment variables ###############
 WORKDIR=`pwd`
@@ -14,14 +13,18 @@ SCRATCH=/scratch/$SLURM_JOBID
 
 cd $SCRATCH
 
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate semibin
-nvidia-smi
+source /global/software/bioconda/init-2024-10
 
 ####### Run your script #########################
-samtools merge $SCRATCH/allEnrichMappedCoassembly.bam $WORKDIR/comebine.coassembly.bamfiles/work_files/*bam
+# Pre-processing
+cp $WORKDIR/final.contigs_1000.fa $SCRATCH
+samtools merge gen_cov_file_mergedSorted.bam /scratch/33930605/output_coverage/work_files/*.bam -@ 64 # MErge all sorted bam files created by MetaBinner/COMEBin
+
+####### Run SemiBin2 ############################
+source ~/software/miniconda3/etc/profile.d/conda.sh
+conda activate semibin
 
 SemiBin2 single_easy_bin --environment ocean \
--i $WORKDIR/final.contigs_1000.fa \
--b $SCRATCH/allEnrichMappedCoassembly.bam \
--o $SCRATCH/SemiBin2.output
+-i final.contigs_1000.fa \
+-b gen_cov_file_mergedSorted.bam \
+-o SemiBin2.Indiv.Mapping
