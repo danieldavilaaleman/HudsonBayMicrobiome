@@ -64,7 +64,7 @@ Writing bins:	/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/Binning_Coassembly
 
 The total number of bins in ```/COMEBin_output/comebin_res/comebin_res_bins``` is **235**
 
-# SemiBin2
+## SemiBin2
 
 ### Installation
 Followed the same approach as before with COMEBin
@@ -95,7 +95,7 @@ The output of SemiBin2 was:
 [2025-02-11 15:08:39,727] INFO: Binning finished
 ```
 
-# Metabinner
+## Metabinner
 
 The next tool implemented was [Metabinner](https://github.com/ziyewang/MetaBinner)
 
