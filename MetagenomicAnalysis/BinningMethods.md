@@ -1,7 +1,7 @@
 # Binning tools implemented 
 The output of the Megahit Co-assembly of the 18 enrichments and the single-enrichmet assemblies are the target of the binning into MAGs.
 
-For Binning the output of MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaBinner](https://github.com/ziyewang/MetaBinner).
+For Binning the output of Co-Assembly MegaHit assembly, we used the tools [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaBinner](https://github.com/ziyewang/MetaBinner).
 
 ## COMEBIN
 
@@ -133,6 +133,11 @@ The QC of the obtained 85 bins from *bin_refinement module of metaWRAP* were per
 |>90 comp  <5 cont| 24 |
 
 # Remove contamination in obtained bins
+
+To remove contamination of the 85 bins obtained by *bin_refinement module of metaWRAP*, [MAGpurify](https://github.com/snayfach/MAGpurify) tool was implemented. **MAGpurify** runs individual modules to predict contamination contigs in each bin. The output is a file named *bin.#.cleaned.fa# without identified contaminated contigs using the script ```run_magpurify.sbatch```. The slurm output was remaned as ```magpurify_summary.out``` and a summary table was created using ```create_magpurify_table.sbatch```.
+
+QC using CheckM2 was run in the 85 cleaned bins to compare before and after cleaning tool.
+
 
 
 # Binning of single 18 enrichment metagenomic assemblies
