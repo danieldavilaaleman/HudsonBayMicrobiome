@@ -144,6 +144,8 @@ QC using CheckM2 was run in the 85 cleaned bins to compare before and after clea
 |>70 comp  <5 cont| 52 |
 |>90 comp  <5 cont| 21 |
 
+The output of MAGpurify decrese the completeness score of some MAGs and this results where dicarted.
+![metaWRAPvsMAGpurify coassembly](https://github.com/user-attachments/assets/ea8e7a28-7a90-40be-b850-011b7b309d08)
 
 # Binning of single 18 enrichment metagenomic assemblies
 
