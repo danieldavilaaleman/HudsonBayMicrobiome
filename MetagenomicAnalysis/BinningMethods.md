@@ -138,6 +138,11 @@ To remove contamination of the 85 bins obtained by *bin_refinement module of met
 
 QC using CheckM2 was run in the 85 cleaned bins to compare before and after cleaning tool.
 
+| Quality| Number of Bins |
+|------- | --------------- |
+|>50 comp  <10 cont| 82 |
+|>70 comp  <5 cont| 52 |
+|>90 comp  <5 cont| 21 |
 
 
 # Binning of single 18 enrichment metagenomic assemblies
