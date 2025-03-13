@@ -119,7 +119,7 @@ The output bins are stored in ```metabinner.output/metabinner_res/ensemble_res/g
 MetaBinner generates **81 bins**
 
 # Bin Refinement
-For bin refinement, the module bin_refinement from [metaWRAP](https://github.com/bxlab/metaWRAP) was implemented using the output bins obtained from [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaDecoder](https://github.com/ziyewang/MetaBinner) using ```scripts/run_metawrap.sbatch```.
+For bin refinement, the module bin_refinement from [metaWRAP](https://github.com/bxlab/metaWRAP) was implemented using the output bins obtained from [COMEBin](https://github.com/ziyewang/COMEBin), [SemiBin2](https://github.com/BigDataBiology/SemiBin), and [MetaBinner](https://github.com/ziyewang/MetaBinner) using ```scripts/run_metawrap.sbatch```.
 
 The output of ***metaWRAP*** for the **Co-Assembly MAGs**: 85 bins
 
