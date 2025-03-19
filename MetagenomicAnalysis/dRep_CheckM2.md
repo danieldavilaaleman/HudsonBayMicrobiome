@@ -14,7 +14,7 @@ cp ../All_bins/${mag}.fa HQ_MAGs/
 done
 ```
 
-dRep is installed in **instrain** conda environment. Dereplicate was running using ```--ignoreGenomeQuality -comp 70 -con 5 --S_algorithm gANI --S_ani 0.95```
+dRep is installed in **instrain** conda environment. Dereplicate was running using ```-comp 50 -con 20 --S_algorithm gANI --S_ani 0.95```
 
 For dRep to completely run using gANI, I download gANI (aka ANIcalculator) and tar the file in ```~/software``` directory. Then add the executable file ANIcalculator to my PATH
 
