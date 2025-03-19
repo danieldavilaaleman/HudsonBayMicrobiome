@@ -1,3 +1,4 @@
+# Dereplication using dRep
 Due to dRep uses CheckM1 for Genome quality assessment before dereplication, I extracted the Medium quality bins (Completeness >70%, contamination <5%) got it using CheckM2 to a new directory before running dRep.
 
 To copy all the medium quality MAGs to a new directory, I created a file with all the quality MAGs
@@ -14,24 +15,6 @@ done
 ```
 
 dRep is installed in **instrain** conda environment. Dereplicate was running using ```--ignoreGenomeQuality -comp 70 -con 5 --S_algorithm gANI --S_ani 0.95```
-```
-#!/bin/bash
-####### Reserve computing resources #############
-#SBATCH --time=04:00:00
-#SBATCH --mem=50G
-#SBATCH --partition=bigmem
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-
-####### Set environment variables ###############
-source ~/software/miniconda3/etc/profile.d/conda.sh
-conda activate instrain
-
-####### Run your script #########################
-dRep dereplicate -g HQ_MAGs/*.fa --ignoreGenomeQuality -comp 70 -con 5 --S_algorithm gANI --S_ani 0.95 dRep_HQ_MAGs
-```
 
 For dRep to completely run using gANI, I download gANI (aka ANIcalculator) and tar the file in ```~/software``` directory. Then add the executable file ANIcalculator to my PATH
 
