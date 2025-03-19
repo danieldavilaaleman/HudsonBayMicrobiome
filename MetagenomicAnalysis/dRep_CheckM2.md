@@ -19,6 +19,16 @@ dRep is installed in **instrain** conda environment. Dereplicate was running usi
 
 For dRep to completely run using gANI, I download gANI (aka ANIcalculator) and tar the file in ```~/software``` directory. Then add the executable file ANIcalculator to my PATH
 
+dRep generates **72 bins**
+
+To create a CheckM2 quality report of the dereplicated mags, the following command was implemented:
+```
+for bin in dereplicated_bins/dRep_HQ_MAGs/dereplicated_genomes/*.fa; do magname=$(basename $bin .fa); echo $(grep -w "$magname" CheckM2/allbins_quality_report_CheckM2.tsv) >> dereplicated_mags_quality_report.CheckM2; done
+```
+
+
+
+
 
 
 
