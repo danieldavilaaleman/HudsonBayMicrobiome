@@ -8,7 +8,7 @@ mamba env create -n checkm2 -f checkm2.yml
 conda activate checkm2
 ```
 
-After installation, CheckM2 was run for all the DasTool bins using ```script/run_checkm2.sbatch```
+After installation, CheckM2 was run for all the metaWRAP bins (single enrichment + co-assembly) using ```script/run_checkm2.sbatch```
 
 CheckM2 output:
 
