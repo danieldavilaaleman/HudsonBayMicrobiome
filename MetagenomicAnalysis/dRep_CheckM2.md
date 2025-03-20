@@ -36,4 +36,3 @@ for bin in dereplicated_bins/dRep_HQ_MAGs/dereplicated_genomes/*.fa; do magname=
 
 
 
-
