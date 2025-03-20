@@ -153,6 +153,27 @@ For binning the 18 enrichment metagenomics data, the same binning strategy was f
 
 The results obtained per binning tool and refinement are the following:
 
+| Sample | COMEBin | SemiBin2 | MetaBinner | metaWRAP |
+| ------ | ------- | -------- | ---------- | -------- |
+| 015_E1 | 12 | 15 | 9 | 9 |
+| 015_E2 | 14 | 14 | 4 | 5 |
+| 016_E1 | 14 | 10 | 5 | 4 |
+| 016_E2 | 20 | 12 | 7 | 6 |
+| 018_E1 | 7 | 5 | 2 | 3 |
+| 018_E2 | 10 | 11 | 9 | 9 |
+| 021_E1 | 25 | 12 | 10 | 9 |
+| 021_E2 | 12 | 15 | 11 | 11 |
+| 034_E1 | 20 | 12 | 11 | 11 |
+| 034_E2 | 20 | 16 | 10 | 11 |
+| 044_E1 | 13 | 12 | 9 | 8 |
+| 044_E2 | 49 | 19 | 10 | 11 |
+| 046_E1 | 9 | 5 | 4 | 4 |
+| 046_E2 | 12 | 6 | 4 | 5 |
+| B1_E1 | 10 | 9 | 6 | 6 |
+| B1_E2 | 14 | 17 | 11 | 11 |
+| R3_E1 | 17 | 17 | 11 | 11 |
+| R3_E2 | 14 | 16 | 8 | 9 |
+
 
 
 
