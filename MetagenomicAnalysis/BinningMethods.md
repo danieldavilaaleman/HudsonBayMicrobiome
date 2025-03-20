@@ -149,6 +149,10 @@ The output of MAGpurify decrese the completeness score of some MAGs and this res
 
 # Binning of single 18 enrichment metagenomic assemblies
 
+For binning the 18 enrichment metagenomics data, the same binning strategy was followed. The difference is that a Snake file was created to run the analysis. The Snake file created can be found in ```scripts/enrichment_binning/snakefile```
+
+The results obtained per binning tool and refinement are the following:
+
 
 
 
