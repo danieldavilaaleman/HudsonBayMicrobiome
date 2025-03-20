@@ -1,0 +1,199 @@
+configfile: "config.yaml"
+
+samples = list(config["samples"].keys()) ## Get the keys of the config dictionary ##
+
+rule all: ## Run all the rules - set as input the final results that you need ##
+    input:
+        expand("CheckM2_QC/{samples}/{binning}", samples=samples, binning=["COMEBin_bins","SemiBin2_bins","MetaBinner_bins","metaWRAP"]) ## For using replicate "{samples}_R{replicate}" ##
+
+
+rule assemblies_filtering: ## Remove contigs shorter  than 1kb ##
+    input:
+        "../MegaHIT_contigs/{samples}_final.contigs.fasta"
+    output:
+        "filtered_contigs/{samples}.filtered.contigs.fasta"
+    conda:
+        "environment.yaml"
+    log:
+        "logs/filtered_tooshort/{samples}.log"
+    threads: 8
+    shell:
+        "python scripts/SNK_filter_tooshort.py {input} 1000 {output[0]} 2> {log}"
+
+rule reads_preprocessing: ## Format the reads file for using it in mapping_gen_cov.sh ##
+    input:
+        R1="../CleanData/Enrichments_gz/{samples}_qc_R1.fastq.gz",
+        R2="../CleanData/Enrichments_gz/{samples}_qc_R2.fastq.gz"
+    output:
+        R_1="Clean_reads/{samples}_qc_R_1.fastq",
+        R_2="Clean_reads/{samples}_qc_R_2.fastq"
+    log:
+        "logs/reads_preprocessing/{samples}.log"
+    threads: 24
+    resources:
+        mem_mb=100000
+    shell: ## Wildcards.samples needs to be used in shell to call the samples wildcards ##
+        """
+        cp {input.R1} Clean_reads/{wildcards.samples}_qc_R_1.fastq.gz
+        cp {input.R2} Clean_reads/{wildcards.samples}_qc_R_2.fastq.gz
+        gunzip -c Clean_reads/{wildcards.samples}_qc_R_1.fastq.gz > {output.R_1} 2> {log}
+        gunzip -c Clean_reads/{wildcards.samples}_qc_R_2.fastq.gz > {output.R_2} 2> {log}
+        """
+
+rule mapping_gen_cov:
+    input:
+        assembly="filtered_contigs/{samples}.filtered.contigs.fasta",
+        r1="Clean_reads/{samples}_qc_R_1.fastq",
+        r2="Clean_reads/{samples}_qc_R_2.fastq"
+    output:
+        directory("Comebin_gen_cov/{samples}") ## The output of SNK_gen_covfile is a directory, therefore add directory() ##
+    conda:
+        "environment.yaml" ## Remember to use the conda environment in each rule that needs it ##
+    log:
+        "logs/mapping_gen_cov/{samples}.log"
+    threads:40
+    resources:
+        mem_mb=100
+    shell:
+        "bash scripts/SNK_gen_cov_file.sh -a {input.assembly} -o {output} "
+        "-t {threads} -m {resources.mem_mb} {input.r1} {input.r2} 2> {log}"
+
+rule run_comebin:
+    input:
+        assembly="filtered_contigs/{samples}.filtered.contigs.fasta",
+        bamfile="Comebin_gen_cov/{samples}/work_files/"
+    output:
+        directory("COMEBinOutput.{samples}")
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/pytorch" ## Conda environment for COMEBin using GPU ##
+    log:
+        "logs/comebin_binning/{samples}.log"
+    threads:48
+    shell:
+        "run_comebin.sh -a {input.assembly} -p {input.bamfile} -o {output} "
+        "-n 6 -t {threads} 2> {log}"
+
+rule run_semibin:
+    input:
+        assembly="filtered_contigs/{samples}.filtered.contigs.fasta",
+        bamfile="Comebin_gen_cov/{samples}/work_files/{samples}_qc_R.bam"
+    output:
+        directory("SemiBin2.Output.{samples}")
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/semibin" ## Conda environment for SemiBin2 ##
+    log:
+        "logs/semibin2/{samples}.log"
+    threads:48
+    shell:
+        "SemiBin2 single_easy_bin --environment ocean -i {input.assembly} "
+        "-b {input.bamfile} -o {output}"
+
+rule metabinner_coverage:
+    input:
+        assembly="filtered_contigs/{samples}.filtered.contigs.fasta",
+        bamfile="Comebin_gen_cov/{samples}/work_files/",  ## Directory of the bam files (optional -b argument for bam files)
+        r1="Clean_reads/{samples}_qc_R_1.fastq",
+        r2="Clean_reads/{samples}_qc_R_2.fastq"
+    output:
+        coverage=directory("Metabinner.coverage.files/{samples}") 
+    conda:
+        "environment.yaml"
+    log:
+        "logs/metabinner_coverage/{samples}.log"
+    threads:48
+    shell:
+        "bash /home/franciscodaniel.davi/software/miniconda3/envs/metabinner/bin/scripts/gen_coverage_file.sh "
+        "-a {input.assembly} -o {output.coverage} -t {threads} -m 80 -b {input.bamfile} {input.r1} {input.r2} 2> {log}"
+
+rule metabinner_kmers:
+    input:
+        "filtered_contigs/{samples}.filtered.contigs.fasta",
+    output:
+        "Metabinner.kmers/{samples}_kmer.csv"
+    conda:
+        "environment.yaml"
+    log:
+        "logs/metabinner_kmers/{samples}.log"
+    threads:24
+    shell:
+        "python SNK_gen_kmer.py {input} 1000 4 {output} 2> {log}" ## SNK_gen_kmer.py was modify for Snakemake format ##
+
+rule run_metabinner:
+    input: ## You need to use full path in each input/output parameter ##
+        assembly="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/binning_enrichments/filtered_contigs/{samples}.filtered.contigs.fasta",
+        coverage="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/binning_enrichments/Metabinner.coverage.files/{samples}/coverage_profile_f1k.tsv",
+        kmerfile="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/binning_enrichments/Metabinner.kmers/{samples}_kmer.csv"
+    output:
+        directory("/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/binning_enrichments/MetaBinner.Output.{samples}")
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/metabinner"
+    log:
+        "logs/run_metabinner/{samples}.log"
+    threads:24
+    shell:
+        """
+        mkdir MetaBinner.Output.{wildcards.samples}
+        run_metabinner.sh -a {input.assembly} -o {output} -d {input.coverage} -k {input.kmerfile} -t {threads} -s huge -p /home/franciscodaniel.davi/software/miniconda3/envs/metabinner/bin 2> {log}
+        """
+
+rule decompress_bins: ## metaWRAP needs bin files in .fna/ .fasta or /.fa -> SemiBin2 generates *.fa.gz
+    input:
+        "SemiBin2.Output.{samples}/output_bins/"
+    output:
+        directory("SemiBin2.Output.{samples}/output_bins/decomp/")
+    log:
+        "logs/decompress_bins/{samples}.log"
+    threads:24
+    shell:
+        """
+        mkdir {output}
+        for file in {input}/*.fa.gz;
+            do
+            output_file={output}/$(basename $file .fa.gz).fa
+            echo {input} > $output_file
+            gunzip -c $file > $output_file
+        done 2> {log}
+        """
+
+rule bin_refinement:
+    input:
+        A="COMEBinOutput.{samples}/comebin_res/comebin_res_bins/",
+        B="SemiBin2.Output.{samples}/output_bins/decomp",
+        C="MetaBinner.Output.{samples}/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/"
+    output:
+        directory("Bin_Refinement/{samples}")
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/metawrap-env"
+    log:
+        "logs/bin_refinement/{samples}.log"
+    threads:24
+    shell:
+        """
+        mkdir Bin_Refinement/{wildcards.samples}
+        metawrap bin_refinement -o {output} -t {threads} -A {input.A} -B {input.B} \
+        -C {input.C} -c 50 -x 10 -m 100 2> {log}
+        """
+
+rule run_checkm2:
+    input:
+        A="COMEBinOutput.{samples}/comebin_res/comebin_res_bins/",
+        B="SemiBin2.Output.{samples}/output_bins/decomp",
+        C="MetaBinner.Output.{samples}/metabinner_res/ensemble_res/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/ensemble_3logtrans/addrefined2and3comps/greedy_cont_weight_3_mincomp_50.0_maxcont_15.0_bins/",
+        D="Bin_Refinement/{samples}/metawrap_50_10_bins/"
+    output:
+        a=directory("CheckM2_QC/{samples}/COMEBin_bins"),
+        b=directory("CheckM2_QC/{samples}/SemiBin2_bins"),
+        c=directory("CheckM2_QC/{samples}/MetaBinner_bins"),
+        d=directory("CheckM2_QC/{samples}/metaWRAP")
+    conda:
+         "/home/franciscodaniel.davi/software/miniconda3/envs/checkm2"
+    log:
+        "logs/checkm2_qc/{samples}.log"
+    threads:24
+    shell:
+        """
+        /home/franciscodaniel.davi/software/checkm2/bin/checkm2 predict --threads {threads} --input {input.A} --output-directory {output.a} --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates 2> {log}
+        /home/franciscodaniel.davi/software/checkm2/bin/checkm2 predict --threads {threads} --input {input.B} --output-directory {output.b} --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
+        /home/franciscodaniel.davi/software/checkm2/bin/checkm2 predict --threads {threads} --input {input.C} --output-directory {output.c} --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fna --remove_intermediates
+        /home/franciscodaniel.davi/software/checkm2/bin/checkm2 predict --threads {threads} --input {input.D} --output-directory {output.d} --database_path //work/ebg_lab/referenceDatabases/checkm2/CheckM2_database/uniref100.KO.1.dmnd -x fa --remove_intermediates
+        """
