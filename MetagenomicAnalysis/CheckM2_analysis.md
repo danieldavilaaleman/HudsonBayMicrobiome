@@ -30,6 +30,6 @@ CheckM2 output:
 To count the number of "Medium Quality" MAGs >70% completenes and < 5% contamination, I used:
 ```
 cat quality_report.tsv | awk '$2 > 70' | awk '$3 < 5' | wc -l
-```
-Medium quality Bins = 167
+``` 
+Medium quality Bins = 167    
 HQ Bins (>90 completeness <5% Contamination) = 100
