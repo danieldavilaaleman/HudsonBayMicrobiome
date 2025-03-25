@@ -11,5 +11,5 @@ For creating the config.yaml file for snakemake pipeline, the following command 
 echo "Bins:" > config.yaml
 basename -s .fa $(ls -1 ../allbins.metaWRAP/*.fa) | sed 's/$/:/g' > bins.names.txt
 ls -1 ../allbins.metaWRAP/*.fa > complete.txt
-paste bins.names.txt complete.txt -d "," | sed 's/^/  /g' | sed 's/","/  /g' >> config.yaml
+paste bins.names.txt complete.txt -d "," | sed 's/^/  /g' | sed 's/,/  /g' >> config.yaml
 ```
