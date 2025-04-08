@@ -4,7 +4,7 @@ The first step for the identification of hydrocarbon degrading genes in reconstr
 
 After gene annotation, HMM from [CANT-HYD](https://github.com/dgittins/CANT-HYD-HydrocarbonBiodegradation) were implemented for hydrocarbon degrading genes identification using trusted cut off parameter.
 
-A Snakefile was created for performing the gene annotation and identification of hydrocarbon degrading genes. ```HC_Analysis/Snakefile```
+A Snakefile was created for performing the gene annotation and identification of hydrocarbon degrading genes. You can find it on ```HC_Analysis/scripts/Snakefile```
 
 For creating the config.yaml file for snakemake pipeline, the following command was run:
 ```
