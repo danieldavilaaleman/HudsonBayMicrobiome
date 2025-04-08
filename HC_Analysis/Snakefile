@@ -1,0 +1,35 @@
+configfile: "config.yaml"
+
+bins=list(config["Bins"].keys())
+
+rule all:
+    input:
+        expand("cant_hyd.out/hmmsearch.{bins}.out", bins=bins)
+
+rule gene_annotation:
+    input:
+        "../allbins.metaWRAP/{bins}.fa"
+    output:
+        "Prodigal_annotation/{bins}.faa"
+    log:
+        "logs/prodigal/{bins}.log"
+    threads:24
+    shell:
+        """
+        module load bioconda/2024-10
+        prodigal -i {input} -a {output} 2> {log}
+        """
+
+rule cant_hyd:
+    input:
+        "Prodigal_annotation/{bins}.faa"
+    output:
+        A="cant_hyd.out/hmmsearch.{bins}.out",
+        B="cant_hyd.out/hmmsearch.{bins}.tblout"
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/cant_hyd"
+    log:
+        "logs/cant_hyd/{bins}.log"
+    threads:24
+    shell:
+        "hmmsearch --cut_nc --tblout {output.B} ../HMM/CANT-HYD.hmm {input} > {output.A} 2> {log}"
