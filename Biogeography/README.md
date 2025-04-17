@@ -18,7 +18,7 @@ To determine the precense/absence of the reconstructed MAGs, raw metagenomics da
 - Tara Polar: Project PRJEB9740
 
 ### Tara Oceans
-To dowload the data (n = 249)
+To dowload the data (n = 249 samples)
 1. Download TSV report from ENA project number
 2. Extract ftp.sra.ebi...##### paths from tsv file by:    
    ```cut -f8 download.sequences.txt | tail -n +2 | sed 's/;/\n/g' > sequences_path_wget.txt```
@@ -31,3 +31,8 @@ To dowload the data (n = 249)
    echo "DONE"
    done < sequences_path_wget.txt
    ```
+### Tara Polar
+
+
+### Arctic & Antarctic 
+n = 120 samples
