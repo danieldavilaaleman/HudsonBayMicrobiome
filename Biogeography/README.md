@@ -22,7 +22,7 @@ To dowload the data
 1. Access SRA NCBI project PRJNA588686
 2. Send to/ File / Summary
 3. ENA project PRJNA588686 - Download report / TSV
-4. To Download using sratoolkit and Experiment accession SRX######
+4. To Download using sratoolkit and Experiment accession SRX######    
    ```cat Summary.report.tsv | sed 's/,/\t/g' | cut -f1 | tail -n +2 > seq_ac_number.txt ```
 5. This gets a list file with all experiment accession numbers to dowload
 6. Create a script to dowload data
