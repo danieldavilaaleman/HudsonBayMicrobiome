@@ -20,7 +20,7 @@ To determine the precense/absence of the reconstructed MAGs, raw metagenomics da
 ### Tara Oceans
 To dowload the data (n = 249)
 1. Download TSV report from ENA project number
-2. Extract ftp.sra.ebi...##### paths from tsv file by:
+2. Extract ftp.sra.ebi...##### paths from tsv file by:    
    ```cut -f8 download.sequences.txt | tail -n +2 | sed 's/;/\n/g' > sequences_path_wget.txt```
 3. Download files with:
    ```
