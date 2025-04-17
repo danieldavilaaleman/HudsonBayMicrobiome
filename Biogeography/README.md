@@ -24,8 +24,8 @@ To dowload the data
 3. ENA project PRJNA588686 - Download report / TSV
 4. To Download using sratoolkit and Experiment accession SRX######    
    ```cat Summary.report.tsv | sed 's/,/\t/g' | cut -f1 | tail -n +2 > seq_ac_number.txt ```
-5. This gets a list file with all experiment accession numbers to dowload
-6. Create a script to dowload data
+5. This creates a list file with all experiment accession numbers to dowload
+6. To dowload data
    ```
    while read -r line
    do
