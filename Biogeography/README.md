@@ -13,7 +13,7 @@ To determine the precense/absence of a reconstructed MAG, coverM trimmed_mean, w
 
 ## Public database
 To determine the precense/absence of the reconstructed MAGs, raw metagenomics data were downloaded from different sources:
-- Arctic and Antactic metagenomics data [Cao et al.,2020](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00826-9)
+- Arctic and Antactic metagenomics data: Project PRJNA588686 [Cao et al.,2020](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00826-9)
 - Tara Oceans: Project PRJEB1787
 - Tara Polar: Project PRJEB9740
 
