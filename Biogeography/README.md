@@ -10,8 +10,7 @@ In #ComputeCanada, to install a software is adviced to create a virtual environm
 
 
 ## Enrichments
-For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome was implemented for 
-relative abundance calculation using a Snakefile.
+For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome v.0.7.0 together with minimap2 version 2.28-r1209 and samtools version 1.21 was implemented for TAD80 (trimmed_mean) calculation using a Snakefile using min-read-percent-identity of 95%.
 
 ## Environmental
 To determine the precense/absence of a reconstructed MAG, coverM trimmed_mean, which removed the 10% of the bases with highest and 10% of bases with lowest coverage (TAD80) was implemented in the Snakefile.
