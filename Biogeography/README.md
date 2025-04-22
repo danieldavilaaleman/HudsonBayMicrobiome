@@ -4,6 +4,11 @@ For biogeography analysis, metagenomics data from enrichments samples, environme
 publicly available data (TARA Oceans, TARA Polar and Antarctic) were mapped against generated dereplicated
 bins.
 
+## Create virtualenv in ComputeCan for MicrobeCensus
+In #ComputeCanada, to install a software is adviced to create a virtual environment inside the job to be fast and give some protecting against filesystem performance issues. For doing this, I need to create a **requirements.txt** file that contains all the information of the environment to be reproducible between jobs.
+
+
+
 ## Enrichments
 For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome was implemented for 
 relative abundance calculation using a Snakefile.
