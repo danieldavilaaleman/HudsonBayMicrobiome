@@ -15,8 +15,8 @@ For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) gen
 ```
 echo "Enrichments:" > config.yaml
 ls -1d ../rawdata/*_E0_* | xargs -n 1 basename | sed 's/$/:/g' > bins.names.txt
-ls -1d ../rawdata/*_E0_* > complete.txt
-paste bins.names.txt complete.txt -d "," | sed 's/^/  /g' | sed 's/,/  /g' >> config.yaml
+ls -1 ../rawdata/*_E*/* | awk -F'/' '{print "\"" $NF "\""}' | paste -sd "," | sed 's/\([^,]*,[^,]*\),/\1\n/g' > fastq.files.txt
+paste bins.names.txt fastq.files.txt -d "-" | sed 's/^/  /g' | sed 's/-/  /g' >> config.yaml
 ```
 
 
