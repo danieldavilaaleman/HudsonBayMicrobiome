@@ -13,8 +13,10 @@ In #ComputeCanada, to install a software is adviced to create a virtual environm
 For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome v.0.7.0 together with minimap2 version 2.28-r1209 and samtools version 1.21 was implemented for TAD80 (trimmed_mean) calculation using a Snakefile using min-read-percent-identity of 95%. To create a configfile.yaml for Snakemake file on raw reads (MicrobeCensus performs better with raw reads as input instead of filtered reads)
 
 ```
-echo "Enrichments:"
-ls -1d ../rawdata/*_E0_* | xargs -n 1 basename
+echo "Enrichments:" > config.yaml
+ls -1d ../rawdata/*_E0_* | xargs -n 1 basename | sed 's/$/:/g' > bins.names.txt
+ls -1d ../rawdata/*_E0_* > complete.txt
+paste bins.names.txt complete.txt -d "," | sed 's/^/  /g' | sed 's/,/  /g' >> config.yaml
 ```
 
 
