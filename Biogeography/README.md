@@ -15,6 +15,8 @@ For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) gen
 ## Environmental
 To determine the precense/absence of a reconstructed MAG, coverM trimmed_mean, which removed the 10% of the bases with highest and 10% of bases with lowest coverage (TAD80) was implemented in the Snakefile.
 
+For Average Genome Size, MicrobeCensus v1.1.1 was implemented. Installation was using an virtualenv following the steps in ```scripts/run_microbecensus.sbatch```. Because python 3.11 was used, an updated version of MicrobeCensus developed by https://pypi.org/project/MicrobeCensus-SourceApp/ was implemented.
+
 ## Public database
 To determine the precense/absence of the reconstructed MAGs, raw metagenomics data were downloaded from different sources:
 - Arctic and Antactic metagenomics data: Project PRJNA588686 [Cao et al.,2020](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00826-9)
