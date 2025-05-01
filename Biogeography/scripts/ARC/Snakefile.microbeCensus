@@ -1,0 +1,27 @@
+import os
+configfile: "config.yaml"
+
+ENRICHMENT_DATA = config["Environments"]
+samples=list(ENRICHMENT_DATA.keys())
+OUTPUT_DIR = "Environments_AGS"
+
+rule all:
+    input:
+	output_files = expand(os.path.join(OUTPUT_DIR, "{sample}.AGS.out"), sample=samples)
+
+rule run_microbeCensus:
+    input:
+	"/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/rawdata/{sample}"
+    output:
+	"Environments_AGS/{sample}.AGS.out"
+    conda:
+	"/home/franciscodaniel.davi/software/miniconda3/envs/MicrobeCensus"
+    log:
+        "logs/coverm/{sample}.log"
+    threads: 24
+    shell:
+	"""
+	R1=$(echo {input}/*_R1*)
+        R2=$(echo {input}/*_R2*)
+        run_microbe_census.py -t {threads} -v $R1,$R2 {output}
+        """
