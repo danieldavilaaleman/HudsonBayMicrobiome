@@ -8,9 +8,8 @@ bins.
 In #ComputeCanada, to install a software is adviced to create a virtual environment inside the job to be fast and give some protecting against filesystem performance issues. For doing this, I need to create a **requirements.txt** file that contains all the information of the environment to be reproducible between jobs.
 
 
-
 ## Enrichments
-For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome v.0.7.0 together with minimap2 version 2.28-r1209 and samtools version 1.21 was implemented for TAD80 (trimmed_mean) calculation using a Snakefile using min-read-percent-identity of 95%. To create a configfile.yaml for Snakemake file on raw reads (MicrobeCensus performs better with raw reads as input instead of filtered reads)
+For enrichments metagenomics data, [coverM](https://github.com/wwood/CoverM) genome v.0.7.0 together with minimap2 version 2.28-r1209 and samtools version 1.21 was implemented for relative abundance calculation using a Snakefile using min-read-percent-identity of 95%. To create a configfile.yaml for Snakemake file on raw reads (MicrobeCensus performs better with raw reads as input instead of filtered reads)
 
 ```
 echo "Enrichments:" > config.yaml
@@ -21,13 +20,13 @@ paste bins.names.txt fastq.files.txt -d "-" | sed 's/^/  /g' | sed 's/-/  /g' >>
 
 
 ## Environmental
-To determine the precense/absence of a reconstructed MAG, coverM trimmed_mean, which removed the 10% of the bases with highest and 10% of bases with lowest coverage (TAD80) was implemented in the Snakefile.
+To determine the precense/absence of a reconstructed MAG, coverM relative abundance >0.1 was set as trheshold. A Snakefile was implemented to run coverM.
 
 For Average Genome Size, MicrobeCensus v1.1.1 was implemented. Installation was using an virtualenv following the steps in ```scripts/run_microbecensus.sbatch```. Because python 3.11 was used, an updated version of MicrobeCensus developed by https://pypi.org/project/MicrobeCensus-SourceApp/ was implemented.
 
 ## Public database
 To determine the precense/absence of the reconstructed MAGs, raw metagenomics data were downloaded from different sources:
-- Arctic and Antactic metagenomics data: Project PRJNA588686 [Cao et al.,2020](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00826-9)
+- Arctic and Antactic metagenomics data: Project PRJNA588686 [Cao et al.,2020](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00826-9) ()
 - Tara Oceans: Project PRJEB1787
 - Tara Polar: Project PRJEB9740
 
