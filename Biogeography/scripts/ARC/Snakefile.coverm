@@ -1,0 +1,26 @@
+configfile: "config.yaml"
+
+samples=list(config["Enrichments"].keys())
+
+rule all:
+    input:
+	expand("coverm/{samples}.tsv", samples=samples)
+
+rule run_coverm:
+    input:
+	A="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/dereplicated_bins/dRep_HQ_MAGs/dereplicated_genomes/",
+        raw_reads="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/rawdata/{samples}"
+    output:
+	"coverm/{samples}.tsv"
+    conda:
+	"/home/franciscodaniel.davi/software/miniconda3/envs/coverm"
+    log:
+        "logs/coverm/{samples}.log"
+    threads:24
+    shell:
+	"""
+	R1=$(echo {input.raw_reads}/*_R1*)
+        R2=$(echo {input.raw_reads}/*_R2*)
+        coverm genome -1 $R1 -2 $R2 --genome-fasta-directory {input.A} -x fa \
+        --min-read-percent-identity 0.95 -o {output} -t {threads} -m relative_abundance
+        """
