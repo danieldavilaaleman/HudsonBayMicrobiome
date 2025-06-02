@@ -10,6 +10,6 @@ for file in ~/scratch/tara.oceans/*.fastq.gz
 do
 filename=$(basename -s .fastq.gz $file)
 echo "Downsample 10 million reads in $filename"
-seqkit sample -p 0.4 $file | seqkit head -n 10000000 > tara.oceans/${filename}.downsampled.fastq.gz
+seqkit sample -p 0.4 $file | seqkit head -n 10000000 > tara.oceans/${filename}.downsampled.fastq.gz #-p change depending the size of the library
 echo "DONE"
 done
