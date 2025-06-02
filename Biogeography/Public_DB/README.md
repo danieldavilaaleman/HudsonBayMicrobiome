@@ -41,7 +41,9 @@ done < sra_ID_2_download.txt
 ```
 where: 
 sra_ID_2_download.txt was generated using the marineMetagenomeDB map portal for west pacific samples and then filtered by Illumina data and remove "sediments", "gut", "amplicon",... to keep only sea metagenomics samples
-```  cat MMDB_metadata.csv | sed 's/,/\t/g' | grep -v "viral" | grep -v "gut" | grep -v "viruses" | grep -v "sediment" | grep -v "sponge" | grep -v "coral" | grep -v "Raw" | grep -v "Tara" | grep -v "amplicon" | grep -v "Niche" | grep -v "soil" | grep -v "assembly" | tr -d \" > filtered.MMDB_metadata.tsv ```
+``` 
+cat MMDB_metadata.csv | sed 's/,/\t/g' | grep -v "viral" | grep -v "gut" | grep -v "viruses" | grep -v "sediment" | grep -v "sponge" | grep -v "coral" | grep -v "Raw" | grep -v "Tara" | grep -v "amplicon" | grep -v "Niche" | grep -v "soil" | grep -v "assembly" | tr -d \" > filtered.MMDB_metadata.tsv
+```
 
 
 
