@@ -7,7 +7,7 @@ To determine the precense/absence of the reconstructed MAGs, raw metagenomics da
 - Tara Oceans: Project PRJEB1787 
 - Tara Polar: Project PRJEB9740
 
-### Dowloading data - Tara Oceans (n = 249 samples), Tara Polar (n = 41 samples), Arctic &Antarctic (n = 120 samples) and marineMetagenoneDB samples (n = 97)
+### Dowloading data - Tara Oceans (n = 249 samples), Tara Polar (n = 41 samples), Arctic &Antarctic (n = 120 samples) and marineMetagenoneDB East Asia (n = 97) & Arctic (n = 101)
 To dowload the data 
 1. Download TSV report from ENA project number
 2. Extract ftp.sra.ebi...##### paths from tsv file by:    
@@ -50,6 +50,7 @@ And for marinemetagenomeDB_Arctic metadata, the command used:
 ```
 cat marineMetagenomeDB_Arctic_metadata.csv | sed 's/,/\t/g' | grep -v "viruses" | grep -v "sediment" | grep -v "amplicon" | grep -v "Whale" | grep -v "TORRENT" | grep -v "Sediments" | grep -v "sponge" | grep -v "eukaryotic" | grep -v "ice" | grep -v "mgm"
 ```
+
 
 
 
