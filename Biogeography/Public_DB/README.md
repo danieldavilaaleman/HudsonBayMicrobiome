@@ -45,6 +45,11 @@ sra_ID_2_download.txt was generated using the marineMetagenomeDB map portal for 
 cat MMDB_metadata.csv | sed 's/,/\t/g' | grep -v "viral" | grep -v "gut" | grep -v "viruses" | grep -v "sediment" | grep -v "sponge" | grep -v "coral" | grep -v "Raw" | grep -v "Tara" | grep -v "amplicon" | grep -v "Niche" | grep -v "soil" | grep -v "assembly" | tr -d \" > filtered.MMDB_metadata.tsv
 ```
 
+And for marinemetagenomeDB_Arctic metadata, the command used:
+
+```
+cat marineMetagenomeDB_Arctic_metadata.csv | sed 's/,/\t/g' | grep -v "viruses" | grep -v "sediment" | grep -v "amplicon" | grep -v "Whale" | grep -v "TORRENT" | grep -v "Sediments" | grep -v "sponge" | grep -v "eukaryotic" | grep -v "ice" | grep -v "mgm"
+```
 
 
 
