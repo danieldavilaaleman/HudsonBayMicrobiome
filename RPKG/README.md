@@ -3,7 +3,8 @@
 For performing comparative metagenomics, reads per kilobase genome equivalents was calculated for AlkB and CYP53.  
 The followed steps:  
 1. Downsample 10 million reads from each FASTQ file using seqkit with seed default ```run_downsampler.sbatch```
-2. Load module for mmseqs2 in CCDB
+2. Confirm that each downsampled files has ~10M reads ```run_stats.sbatch```
+3. Load module for mmseqs2 in CCDB
    ```
    module load mmseqs2/17-b804f
    ```
