@@ -18,7 +18,7 @@ I used Plass to assemble a catalogue of protein sequences directly from each of 
 cat *_plass_assembly.faa > concatenated_all_plass_proteins.faa
 mmseqs easy-cluster concatenated_all_plass_proteins.faa clustered_proteins tmp --min-seq-id 0.9 -c 0.95 --cov-mode 1
 ```
-The number of protein sequences in ```concatenated_all_plass_proteins.faa``` = 117,146,334
+The number of protein sequences in ```concatenated_all_plass_proteins.faa``` = 122,825,777
 
 Those values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedinglab/MMseqs2/wiki/Tutorials)
 - a maximum E-value threshold (option -e, default 10^-3) computed according to the gap-corrected Karlin-Altschul statistics;
