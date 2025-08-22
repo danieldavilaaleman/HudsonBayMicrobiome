@@ -32,5 +32,5 @@ I used mmseqs2 search agains the eggNOG DB
 mmseqs search plass_proteins_rep eggNOG Annotation_results tmp -s 7
 
 # and convert it in human-readable TSV format
-mmseqs createtsv plass_proteins_rep egg_NOG Annotation_results prot_rep_annotations_results_eggNOG.tsv
+mmseqs createtsv plass_proteins_rep_DB mmseqs2_DB/eggNOG_DB  Annotation_results prot_rep_annotations_results_eggNOG.tsv
 ```
