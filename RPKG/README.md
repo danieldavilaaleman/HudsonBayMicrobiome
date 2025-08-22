@@ -25,3 +25,12 @@ Those values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedi
 - a minimum coverage (option -c, which is defined by the number of aligned residue pairs divided by either the maximum of the length of query/centre and target/non-centre sequences alnRes/max(qLen,tLen) (default mode, --cov-mode 0), by the length of the target/non-centre sequence alnRes/tLen (--cov-mode 1), or by the length of the query/centre alnRes/qLen (--cov-mode 2);
 
 The output of the easy-clustering ```clustered_proteins_rep_seq.fasta``` = 5,679,443
+
+## Annotation of the representative protein catalog
+I used mmseqs2 search agains the eggNOG DB
+```
+mmseqs search plass_proteins_rep pfam_profile mmseqs_result_pfam tmp -s 7
+
+# and convert it in human-readable TSV format
+mmseqs createtsv plass_proteins_rep pfam_profile mmseqs_result_pfam mmseqs_result_pfam.tsv
+```
