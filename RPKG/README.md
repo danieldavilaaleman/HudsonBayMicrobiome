@@ -53,5 +53,5 @@ Then,the tsv output file were filtered. 1) Remove sequence ID < 30 in aligment s
 cat prot_rep_annotations_results_eggNOG.tsv | awk -F'\t' '$3 >= 30' | sort -t$'\t' -k1,1 -k3,3nr -k5,5g | awk -F'\t' '!seen[$1]++' > top_scoring_prot_rep_annotations_eggNOG.tsv
 ```
 
-This filtering result in a tsv file with 1,910,319 rows or proteins
+This filtering result in a tsv file with 1,910,319 rows or proteins named '''top_scoring_prot_rep_annotations_eggNOG.tsv'''
 
