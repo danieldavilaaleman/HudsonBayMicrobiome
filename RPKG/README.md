@@ -38,7 +38,7 @@ mmseqs createtsv plass_proteins_rep_DB mmseqs2_DB/eggNOG_DB  Annotation_results 
 The output tsv file contains the following information:
 1. Query sequence ID: The identifier of the sequence from the query database.
 2. Target sequence ID: The identifier of the sequence from the target database that aligns with the query.
-3. Alignment score: A score indicating the quality of the alignment.
+3. Alignment score: A score indicating the quality of the alignment (Smith-Waterman aligment score).
 4. Sequence identity: The percentage of identical residues between the aligned regions.
 5. E-value: The expected number of random matches with a score at least as good as the observed score.
 6. Query start position: The starting position of the alignment on the query sequence.
@@ -47,3 +47,8 @@ The output tsv file contains the following information:
 9. Target start position: The starting position of the alignment on the target sequence.
 10. Target end position: The ending position of the alignment on the target sequence.
 11. Target length: The total length of the target sequence.
+
+Then, Sequence ID were sorted to get the lowest E-value with the top aligment scoring using:
+```
+cat prot_rep_annotations_results_eggNOG.tsv | awk -F'\t' '$3 >= 30' | sort -t$'\t' -k1,1 -k3,3nr -k5,5g | awk -F'\t' '!seen[$1]++' > top_scoring_prot_rep_annotations_eggNOG.tsv
+```
