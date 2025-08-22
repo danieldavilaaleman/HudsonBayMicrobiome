@@ -48,7 +48,7 @@ The output tsv file contains the following information:
 10. Target end position: The ending position of the alignment on the target sequence.
 11. Target length: The total length of the target sequence.
 
-Then, Sequence ID were sorted to get the lowest E-value with the top aligment scoring using:
+Then,the tsv output file were filtered. 1) Remove sequence ID < 30 in aligment scoring 2) Keeping Sequence ID with the lowest E-value with the top aligment scoring using:
 ```
 cat prot_rep_annotations_results_eggNOG.tsv | awk -F'\t' '$3 >= 30' | sort -t$'\t' -k1,1 -k3,3nr -k5,5g | awk -F'\t' '!seen[$1]++' > top_scoring_prot_rep_annotations_eggNOG.tsv
 ```
