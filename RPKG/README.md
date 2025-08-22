@@ -52,18 +52,19 @@ Then,the tsv output file were filtered. 1) Remove sequence ID < 30 in aligment s
 ```
 cat prot_rep_annotations_results_eggNOG.tsv | awk -F'\t' '$3 >= 30' | sort -t$'\t' -k1,1 -k3,3nr -k5,5g | awk -F'\t' '!seen[$1]++' > top_scoring_prot_rep_annotations_eggNOG.tsv
 ```
-where:
- awk command: awk -F'\t' '$3 >= 30'
+where:  
 
-```-F'\t'```: Sets tab as field separator
-```$3 >= 30```: Only keeps rows where the third column (alignment score) is >= 30
-```sort``` command: ```sort -t$'\t' -k1,1 -k3,3nr -k5,5g```
+ ```awk command: awk -F'\t' '$3 >= 30'```
 
-```-t$'\t'```: Uses tab as field separator
-```-k1,1```: First sorts by sequence ID
-```-k3,3nr```: Then sorts by alignment score (column 3) numerically in reverse order (-nr) so highest scores come first
-```-k5,5g```: Finally sorts by E-value in ascending order using general numeric sort for scientific notation
-Second ```awk``` command: ```awk -F'\t' '!seen[$1]++'```
+```-F'\t'```: Sets tab as field separator    
+```$3 >= 30```: Only keeps rows where the third column (alignment score) is >= 30    
+```sort``` command: ```sort -t$'\t' -k1,1 -k3,3nr -k5,5g```    
+
+```-t$'\t'```: Uses tab as field separator    
+```-k1,1```: First sorts by sequence ID    
+```-k3,3nr```: Then sorts by alignment score (column 3) numerically in reverse order (-nr) so highest scores come first    
+```-k5,5g```: Finally sorts by E-value in ascending order using general numeric sort for scientific notation    
+Second ```awk``` command: ```awk -F'\t' '!seen[$1]++'```    
 
 Keeps only the first occurrence of each sequence ID, which will be the one with highest alignment score and lowest E-value due to our sorting
 
