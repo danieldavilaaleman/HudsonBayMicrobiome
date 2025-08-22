@@ -27,10 +27,23 @@ Those values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedi
 The output of the easy-clustering ```clustered_proteins_rep_seq.fasta``` = 5,679,443
 
 ## Annotation of the representative protein catalog
-I used mmseqs2 search agains the eggNOG DB
+First create a DB of the representative plass protein and then used mmseqs2 search agains the eggNOG DB
 ```
 mmseqs search plass_proteins_rep eggNOG Annotation_results tmp -s 7
 
 # and convert it in human-readable TSV format
 mmseqs createtsv plass_proteins_rep_DB mmseqs2_DB/eggNOG_DB  Annotation_results prot_rep_annotations_results_eggNOG.tsv
 ```
+
+The output tsv file contains the following information:
+1. Query sequence ID: The identifier of the sequence from the query database.
+2. Target sequence ID: The identifier of the sequence from the target database that aligns with the query.
+3. Alignment score: A score indicating the quality of the alignment.
+4. Sequence identity: The percentage of identical residues between the aligned regions.
+5. E-value: The expected number of random matches with a score at least as good as the observed score.
+6. Query start position: The starting position of the alignment on the query sequence.
+7. Query end position: The ending position of the alignment on the query sequence.
+8. Query length: The total length of the query sequence.
+9. Target start position: The starting position of the alignment on the target sequence.
+10. Target end position: The ending position of the alignment on the target sequence.
+11. Target length: The total length of the target sequence.
