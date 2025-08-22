@@ -29,8 +29,8 @@ The output of the easy-clustering ```clustered_proteins_rep_seq.fasta``` = 5,679
 ## Annotation of the representative protein catalog
 I used mmseqs2 search agains the eggNOG DB
 ```
-mmseqs search plass_proteins_rep pfam_profile mmseqs_result_pfam tmp -s 7
+mmseqs search plass_proteins_rep eggNOG Annotation_results tmp -s 7
 
 # and convert it in human-readable TSV format
-mmseqs createtsv plass_proteins_rep pfam_profile mmseqs_result_pfam mmseqs_result_pfam.tsv
+mmseqs createtsv plass_proteins_rep egg_NOG Annotation_results prot_rep_annotations_results_eggNOG.tsv
 ```
