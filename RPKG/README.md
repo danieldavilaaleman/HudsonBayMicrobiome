@@ -70,3 +70,10 @@ Keeps only the first occurrence of each sequence ID, which will be the one with 
 
 This filtering result in a tsv file with 1,910,319 rows or proteins named ```top_scoring_prot_rep_annotations_eggNOG.tsv```
 
+***or can be filtering the best alignment matches using***
+
+```
+mmseqs filterdb Annotation_results topScoringAnnotationDB --extract-lines 1
+```
+
+
