@@ -27,7 +27,7 @@ Those values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedi
 The output of the easy-clustering ```clustered_proteins_rep_seq.fasta``` = 5,679,443
 
 ## Annotation of the representative protein catalog
-First create a DB of the representative plass protein and then used mmseqs2 search agains the eggNOG DB
+First create a DB of the representative plass protein (named plass_proteins_rep) and then used mmseqs2 search agains the eggNOG DB
 ```
 mmseqs search plass_proteins_rep eggNOG Annotation_results tmp -s 7
 
