@@ -1,0 +1,42 @@
+configfile: "config.yaml"
+
+samples = list(config["samples"].keys()) ## Get the keys of the config dictionary ##
+
+rule all: ## Run all the rules - set as input the final results that you need ##
+    input:
+        "PLASS_output.co-assembly.faa"
+        #expand("PLASS_output.{samples}", samples=samples) ## For using replicate "{samples}_R{replicate}" ##
+
+rule run_plass:
+    input:
+        r1="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/CleanData/Enrichments_gz/{samples}_qc_R1.fastq.gz",
+        r2="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/CleanData/Enrichments_gz/{samples}_qc_R2.fastq.gz"
+    output:
+        directory("PLASS_output.{samples}")
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/plass" ## Conda environment for plass##
+    log:
+        "logs/{samples}.log"
+    threads:48
+    shell:
+        """
+	    mkdir {output}
+	    plass assemble {input.r1} {input.r2} {output}/{wildcards.samples}_plass_assembly.faa tmp 2> {log}
+	    """
+
+rule run_plass_coassembly:
+    input:
+        all_reads="/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/CleanData/Enrichments_gz"
+    output:
+        "PLASS_output.co-assembly.faa"
+    conda:
+        "/home/franciscodaniel.davi/software/miniconda3/envs/plass" ## Conda environment for plass##
+    log:
+        "logs/coassembly.log"
+    threads: 48
+    shell:
+        """
+        cat {input}/*_R1.fastq.gz > Concatenated_all_enrichment_reads_R1.fastq.gz
+        cat {input}/*_R2.fastq.gz > Concatenated_all_enrichment_reads_R2.fastq.gz
+        plass assemble Concatenated_all_enrichment_reads_R1.fastq.gz Concatenated_all_enrichment_reads_R1.fastq.gz {output} tmp 2> {log}
+        """
