@@ -1,0 +1,19 @@
+samples:
+  015_E1:  015_E1_final.contigs.fasta
+  015_E2:  015_E2_final.contigs.fasta
+  016_E1:  016_E1_final.contigs.fasta
+  016_E2:  016_E2_final.contigs.fasta
+  018_E1:  018_E1_final.contigs.fasta
+  018_E2:  018_E2_final.contigs.fasta
+  021_E1:  021_E1_final.contigs.fasta
+  021_E2:  021_E2_final.contigs.fasta
+  034_E1:  034_E1_final.contigs.fasta
+  034_E2:  034_E2_final.contigs.fasta
+  044_E1:  044_E1_final.contigs.fasta
+  044_E2:  044_E2_final.contigs.fasta
+  046_E1:  046_E1_final.contigs.fasta
+  046_E2:  046_E2_final.contigs.fasta
+  B1_E1:  B1_E1_final.contigs.fasta
+  B1_E2:  B1_E2_final.contigs.fasta
+  R3_E1:  R3_E1_final.contigs.fasta
+  R3_E2:  R3_E2_final.contigs.fasta
