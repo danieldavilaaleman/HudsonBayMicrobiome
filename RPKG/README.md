@@ -76,4 +76,6 @@ This filtering result in a tsv file with 1,910,319 rows or proteins named ```top
 mmseqs filterdb Annotation_results topScoringAnnotationDB --extract-lines 1
 ```
 
+This generates a DB named **topScoringAnnotationDB** which can be used for search against enrichments, environmental and mmDB fasta files to get relative abundance of each representative protein across the different samples.
 
+## Relative abundance of PLASS representative protein catalog
