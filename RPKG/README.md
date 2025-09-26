@@ -20,7 +20,7 @@ mmseqs easy-cluster concatenated_all_plass_proteins.faa clustered_proteins tmp -
 ```
 The number of protein sequences in ```concatenated_all_plass_proteins.faa``` = 122,825,777
 
-Those values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedinglab/MMseqs2/wiki/Tutorials)
+Clustering parameters values where selected based on MMSEQS2 [TUTORIAL](https://github.com/soedinglab/MMseqs2/wiki/Tutorials)
 - a maximum E-value threshold (option -e, default 10^-3) computed according to the gap-corrected Karlin-Altschul statistics;
 - a minimum coverage (option -c, which is defined by the number of aligned residue pairs divided by either the maximum of the length of query/centre and target/non-centre sequences alnRes/max(qLen,tLen) (default mode, --cov-mode 0), by the length of the target/non-centre sequence alnRes/tLen (--cov-mode 1), or by the length of the query/centre alnRes/qLen (--cov-mode 2);
 
