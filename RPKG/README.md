@@ -81,5 +81,5 @@ This generates a DB named **topScoringAnnotationDB** which can be used for searc
 ## Relative abundance of PLASS representative protein catalog
 To check the abundance of the genes present in our DB topScoringAnnotationDB in each of the read files:
 1. Create a read sequence DB from the fasta files using ```createdb```    
-I copied the deep sequenced environmental files from GENICE to ~/Hudson_environmental_data and create the Site DB by concatenating R1 and R2
+I copied the deep sequenced environmental files from GENICE to ~/Hudson_environmental_data and create the Site DB. ```mmseqs2 createdb``` accepts multiple FASTA files as input ```mmseqs createdb file1.fa file2.fa.gz file3.fa sequenceDB```
 2. Extract the ORF from the read DB using ```extractorfs```
