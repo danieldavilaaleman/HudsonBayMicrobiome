@@ -85,3 +85,5 @@ I copied the deep sequenced environmental files from GENICE to ~/Hudson_environm
 I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 
 3. Extract the ORF from the read DB using ```extractorfs```
+```mmseqs extractorfs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
+
