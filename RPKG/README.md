@@ -84,6 +84,11 @@ To check the abundance of ORFs from raw read to the protein catalog, could be DB
 I copied the deep sequenced environmental files from GENICE to ~/Hudson_environmental_data and create the Site DB. ```mmseqs2 createdb``` accepts multiple FASTA files as input ```mmseqs createdb file1.fa file2.fa.gz file3.fa sequenceDB```
 I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 
-3. Extract the ORF from the read DB using ```extractorfs```
+2. Extract the ORF from the read sequencing DB using ```extractorfs```
 ```mmseqs extractorfs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
+
+3. Translate the nucleotide ORFs to protein sequences using ```translatenucs```
+   ```mmseqs translatenucs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
+   
+
 
