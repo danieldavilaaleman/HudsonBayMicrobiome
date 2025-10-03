@@ -79,7 +79,7 @@ mmseqs filterdb Annotation_results topScoringAnnotationDB --extract-lines 1
 This generates a DB named **topScoringAnnotationDB** which can be used for search against enrichments, environmental and mmDB fasta files to get relative abundance of each representative protein across the different samples.
 
 ## Relative abundance of PLASS representative protein catalog
-To check the abundance of the genes present in our DB topScoringAnnotationDB in each of the read files:
+To check the abundance of ORFs from raw read to the protein catalog, could be DB topScoringAnnotationDB or dereplicated marine protein catalog:
 1. Create a read sequence DB from the fasta files using ```createdb```    
 I copied the deep sequenced environmental files from GENICE to ~/Hudson_environmental_data and create the Site DB. ```mmseqs2 createdb``` accepts multiple FASTA files as input ```mmseqs createdb file1.fa file2.fa.gz file3.fa sequenceDB```
 I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
