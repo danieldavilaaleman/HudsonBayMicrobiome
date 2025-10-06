@@ -92,7 +92,8 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 
 4. Map the protein-translated ORFs to the representative plass protein (named: **plass_proteins_rep_DB**)
 
-```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 7.5 #Sensitive mapping```
+```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 7.5 #Sensitive mapping```    
+query is the DB that you want to know (plass_proteins) and target is the DB to compare with (eggNOG)
 
 
 
