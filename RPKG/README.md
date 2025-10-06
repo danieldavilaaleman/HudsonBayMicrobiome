@@ -90,10 +90,10 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 3. Translate the nucleotide ORFs to protein sequences using ```translatenucs```
    ```mmseqs translatenucs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
 
-4. Map the protein-translated ORFs to the representative plass protein (named: **plass_proteins_rep_DB**)
+4. Map the protein-translated ORFs to the top Annotation results of the dereplicated representative plass protein (named: **topScoringAnnotationDB**)
 
 ```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 7.5 #Sensitive mapping```    
-query is the DB that you want to know (plass_proteins) and target is the DB to compare with (eggNOG)
+query is the DB that you want to know (translated_ORF) and target is the DB to compare with or reference (topScoringAnnotationDB)
 
 
 
