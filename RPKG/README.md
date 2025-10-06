@@ -89,6 +89,14 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 
 3. Translate the nucleotide ORFs to protein sequences using ```translatenucs```
    ```mmseqs translatenucs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
+
+4. Map the protein-translated ORFs to the representative plass protein (named: **plass_proteins_rep_DB**)
+
+```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 7.5 #Sensitive mapping```
+
+
+
+
    
 
 
