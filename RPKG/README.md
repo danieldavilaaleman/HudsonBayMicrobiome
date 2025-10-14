@@ -93,7 +93,7 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 4. Map the protein-translated ORFs to the dereplicated representative plass protein created from raw reads of the Enrichments (named: **plass_proteins_rep_DB**)
    ```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 4 #Fast mapping``` query is the DB that you want to know (translated_ORF) and target is the DB to compare with or reference (plass_proteins_DB)
 
-5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ````mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know) <i:targetDB> (Reference DB)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
+5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ```mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know) <i:targetDB> (Reference DB)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
 
 
 
