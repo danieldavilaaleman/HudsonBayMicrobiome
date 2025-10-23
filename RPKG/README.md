@@ -98,7 +98,7 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 6. Keep the best target mapping using     ```mmseqs filterdb <i:resultDB> <o:resultDB> --extract-lines 1```
 Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored 46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored.topScoring --extract-lines 1``` 
 
-7. Swap topScoring DB ##NOTE## - the query DB is the initial DB that want to ask the question. In this case is translated_DB
+7. Swap topScoring DB **NOTE** - the query DB is the initial DB that want to ask the question. In this case is translated_DB
 ```mmseqs swapresults <i:queryDB> <i:targetDB> <i:resultDB> <o:resultDB>```      
 which can be ```mmseqs swapresults translated_DB plass_protein_rep_DB topScoringDB swapDB```
 
