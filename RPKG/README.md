@@ -93,14 +93,14 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 4. Map the protein-translated ORFs to the dereplicated representative plass protein created from raw reads of the Enrichments (named: **plass_proteins_rep_DB**)
    ```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 4 #Fast mapping``` query is the DB that you want to know (translated_ORF) and target is the DB to compare with or reference (plass_proteins_DB)
 
-5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ```mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know) <i:targetDB> (Reference DB)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
+5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ```mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know - translated_DB) <i:targetDB> (Reference DB - Generated PLASS protein Catalog)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
 
 6. Keep the best target mapping using     ```mmseqs filterdb <i:resultDB> <o:resultDB> --extract-lines 1```
 Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored 46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored.topScoring --extract-lines 1``` 
 
-7. Swap topScoring DB
+7. Swap topScoring DB ##NOTE## - the query DB is the initial DB that want to ask the question. In this case is translated_DB
 ```mmseqs swapresults <i:queryDB> <i:targetDB> <i:resultDB> <o:resultDB>```      
-which can be ```mmseqs swapresults rescored_DB plass_protein_rep_DB topScoringDB transposedDB```
+which can be ```mmseqs swapresults translated_DB plass_protein_rep_DB topScoringDB swapDB```
 
 
 
