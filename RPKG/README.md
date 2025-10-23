@@ -96,7 +96,7 @@ I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
 5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ```mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know) <i:targetDB> (Reference DB)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
 
 6. Keep the best target mapping using     ```mmseqs filterdb <i:resultDB> <o:resultDB> --extract-lines 1```
-Example: filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored 46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored.topScoring --extract-lines 1 
+Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored 46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored.topScoring --extract-lines 1``` 
 
 7. 
 
