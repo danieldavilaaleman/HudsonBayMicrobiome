@@ -100,7 +100,7 @@ Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.tr
 
 7. Swap topScoring DB
 ```mmseqs swapresults <i:queryDB> <i:targetDB> <i:resultDB> <o:resultDB>```      
-which can be ```mmseqs swapresults rescored_DB plass_protein_rep_DB topScoringDB transposedDB
+which can be ```mmseqs swapresults rescored_DB plass_protein_rep_DB topScoringDB transposedDB```
 
 
 
