@@ -102,7 +102,11 @@ Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.tr
 ```mmseqs swapresults <i:queryDB> <i:targetDB> <i:resultDB> <o:resultDB>```      
 which can be ```mmseqs swapresults translated_DB plass_protein_rep_DB topScoringDB swapDB```
 
+8. Count the number of mapped read-ORF to the target DB
+```mmseqs result2stats <i:querry> <i:target> <i:resultDB> <o:statsDB>``` this will be
+```mmseqs result2stats translated_DB plass_protein_rep_DB swapDB statsDB --stat linecount --tsv 1```
 
+10. 
 
 
 
