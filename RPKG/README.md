@@ -104,10 +104,11 @@ which can be ```mmseqs swapresults translated_DB plass_protein_rep_DB topScoring
 
 8. Count the number of mapped read-ORF to the target DB
 ```mmseqs result2stats <i:querry> <i:target> <i:resultDB> <o:statsDB>``` this will be
-```mmseqs result2stats translated_DB plass_protein_rep_DB swapDB statsDB --stat linecount --tsv 1```
+```mmseqs result2stats translated_DB plass_protein_rep_DB swapDB count.results --stat linecount```
 
-10. 
-
+9. Create a tsv file with the results
+```mmseqs createtsv <i:querryDB> <i:targetDB> <i:resultsDB> <o:tsvFILE>```    this will be
+```mmseqs createtsv translated_DB plass_protein_rep_DB count.results .tsv --target-column 0```
 
 
    
