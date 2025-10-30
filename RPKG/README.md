@@ -78,38 +78,28 @@ mmseqs filterdb Annotation_results topScoringAnnotationDB --extract-lines 1
 
 This generates a DB named **topScoringAnnotationDB** which can be used for search against enrichments, environmental and mmDB fasta files to get relative abundance of each representative protein across the different samples.
 
-## Relative abundance of PLASS representative protein catalog
-To check the abundance of ORFs from raw read to the protein catalog, could be DB topScoringAnnotationDB or dereplicated marine protein catalog:
-1. Create a read sequence DB from the fasta files using ```createdb```    
-I copied the deep sequenced environmental files from GENICE to ~/Hudson_environmental_data and create the Site DB. ```mmseqs2 createdb``` accepts multiple FASTA files as input ```mmseqs createdb file1.fa file2.fa.gz file3.fa sequenceDB```
-I need to convert the fastq.gz files to fasta files using ```seqkit fq2fa```
+## Relative abundance of proteins in reads-ORFs using eggNOG protein catalog
+To check the abundance of proteins using the read-ORFs of each metagenome a follow the same strategy as [Nayfach and Pollard](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0611-7):
 
-2. Extract the ORF from the read sequencing DB using ```extractorfs```
+1. Downsample R1 read files to 10Million reads
+2. Create a read sequence DB from the fasta files using ```createdb```    
+3. Extract the ORF from the read sequencing DB using ```extractorfs```
 ```mmseqs extractorfs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
 
-3. Translate the nucleotide ORFs to protein sequences using ```translatenucs```
+4. Translate the nucleotide ORFs to protein sequences using ```translatenucs```
    ```mmseqs translatenucs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
 
-4. Map the protein-translated ORFs to the dereplicated representative plass protein created from raw reads of the Enrichments (named: **plass_proteins_rep_DB**)
-   ```mmseqs prefilter <i:queryDB> <i:targetDB> <o:prefilterDB> -s 4 #Fast mapping``` query is the DB that you want to know (translated_ORF) and target is the DB to compare with or reference (plass_proteins_DB)
+5. Search the protein-translated ORFs againt the eggNOG protein DB
+   ```mmseqs search <i:queryDB> <i:targetDB> <o:mapeggNOG> -s 4 #Fast mapping``` query is the DB that you want to know (translated_ORF) and target is the DB to compare with or reference (eggNOG_DB)
 
-5. score the prefilter hits with a gapless alignment (rescorediagonal with options -c 1 –cov-mode 2 –min-seq-id 0.95 –rescore-mode 2 -e 0.000001 –sort-results 1 to have significant hits and fully covered by the protein sequence.     ```mmseqs2 rescorediagonal <i:queryDB> (query question sequences you want to know - translated_DB) <i:targetDB> (Reference DB - Generated PLASS protein Catalog)  <i:prefilteredDB> (mapPlassProtRepCatalog) <o:resultDB> -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1```
+6. Keep the best target mapping using     ```mmseqs filterdb <i:mappeggNOG> <o:topScored> --extract-lines 1```
 
-6. Keep the best target mapping using     ```mmseqs filterdb <i:resultDB> <o:resultDB> --extract-lines 1```
-Example: ```filterdb /scratch/37076173/46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored 46_JL0118_W_0_0020um_80C_11.qc.DB.ORFs.translated.rescored.topScoring --extract-lines 1``` 
-
-7. Swap topScoring DB **NOTE** - the query DB is the initial DB that want to ask the question. In this case is translated_DB
-```mmseqs swapresults <i:queryDB> <i:targetDB> <i:resultDB> <o:resultDB>```      
-which can be ```mmseqs swapresults translated_DB plass_protein_rep_DB topScoringDB swapDB```
-
-8. Count the number of mapped read-ORF to the target DB
-```mmseqs result2stats <i:querry> <i:target> <i:resultDB> <o:statsDB>``` this will be
+7. Create a human-readable results of mapped read-ORF to the target DB
+```mmseqs convertalis <i:querry> <i:target> <i:topScored> <o:tab>``` this will be
 ```mmseqs result2stats translated_DB plass_protein_rep_DB swapDB count.results --stat linecount```
 
-9. Create a tsv file with the results
-```mmseqs createtsv <i:querryDB> <i:targetDB> <i:resultsDB> <o:tsvFILE>```    this will be
-```mmseqs createtsv translated_DB plass_protein_rep_DB count.results .tsv --target-column 0```
-
+8. Create a tsv with counts and size of target
+```cut -f2,14 ${base_name}.mapAbundance.tab | sort | uniq -c | sort -nr > ${base_name}.unique.tab```
 
    
 
