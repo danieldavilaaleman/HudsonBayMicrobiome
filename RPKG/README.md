@@ -82,6 +82,9 @@ This generates a DB named **topScoringAnnotationDB** which can be used for searc
 To check the abundance of proteins using the read-ORFs of each metagenome a follow the same strategy as [Nayfach and Pollard](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0611-7):
 
 1. Downsample R1 read files to 10Million reads
+
+   ```seqkit sample -p 0.9 <file> | seqkit head```
+   
 2. Create a read sequence DB from the fasta files using ```createdb```    
 3. Extract the ORF from the read sequencing DB using ```extractorfs```
 ```mmseqs extractorfs <i:sequenceDB> <o:sequenceDB> --translation-table 11 (prokaryote) -v 3 (verbosity info)```
