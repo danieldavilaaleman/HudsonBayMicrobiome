@@ -79,7 +79,7 @@ mmseqs filterdb Annotation_results topScoringAnnotationDB --extract-lines 1
 This generates a DB named **topScoringAnnotationDB** which can be used for search against enrichments, environmental and mmDB fasta files to get relative abundance of each representative protein across the different samples.
 
 ## Relative abundance of proteins in reads-ORFs using eggNOG protein catalog
-To check the abundance of proteins using the read-ORFs of each metagenome a follow the same strategy as [Nayfach and Pollard](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0611-7):
+To check the abundance of proteins using the read-ORFs of each metagenome a follow the same strategy as [Nayfach and Pollard](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0611-7). You can find the sbatch script as relative_abundance_plass.sbatch:
 
 1. Downsample R1 read files to 10Million reads
 
