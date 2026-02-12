@@ -94,6 +94,6 @@ rule cant_hyd:
     shell:
         """
         hmmsearch --cut_tc --tblout {output.B} ../../HMM/CANT-HYD.hmm {input} > {output.A} 2> {log}
-        hmmsearch --incE 0.000001 --incdomE 0.000001 --tblout {output.C} ../../HMM/AlkB_MAB.hmm {input} > {output.D}
+        hmmsearch -E 1e-9 --incE 1e-9 --incdomE 1e-9 --tblout {output.C} ../../HMM/AlkB_MAB.hmm {input} > {output.D}
         """
 ```
