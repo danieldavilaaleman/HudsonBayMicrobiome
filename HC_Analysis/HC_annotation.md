@@ -67,7 +67,7 @@ rule run_plass_coassembly:
         """
 ```
 
-Then, I used **hmmsearch** with both HMMs (CANT-HYD.hmm and AlkB_MAB.hmm) to look for HCD genes
+Then, I used **hmmsearch** with both HMMs (CANT-HYD.hmm and AlkB_MAB.hmm) to look for HCD genes ```/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies_CANT-HYD/Enrichments```
 
 ```
 configfile: "config.yaml"
