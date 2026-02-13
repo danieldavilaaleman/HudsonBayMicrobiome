@@ -21,7 +21,7 @@ for i in hmmsearch.AlkB_MAB*.tblout; do echo "file: $i" ; read -n 1 -s -r -p "" 
 
 ## Enrichment annotation
 
-For enrichments, I performed plass assembly of **all** Clean reads using this Snakefile
+For enrichments, I performed plass assembly of **all** Clean reads using this Snakefile ```/work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments```
 ```
 configfile: "config.yaml"
 
