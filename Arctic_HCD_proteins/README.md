@@ -133,7 +133,7 @@ References
 - MMseqs2: Steinegger & Söding
 - HMMER: Eddy SR
 - DIAMOND: Buchfink et al.
-- CANT‑HYD database: (include the CANT‑HYD citation/URL here)
+- CANT‑HYD database
 
 Contact
 -------
