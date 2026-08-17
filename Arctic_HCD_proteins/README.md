@@ -16,9 +16,8 @@ Overview of the approach
 5. Map nucleotide reads from global metagenomes to the Arctic protein reference using translated search (DIAMOND blastx) and quantify abundance to determine geographic specificity.
 6. Perform downstream analyses (presence/absence, abundance normalization, phylogenetics, diversity metrics) to confirm Arctic specificity.
 
-### STEPS
-This directory contains the representative proteins from all the enrichments and the CANT-HYD analysis details 
-Steps that were followed:
+## STEPS
+## ________________________
 
 1. Concatenation of all plass.faa files from all the enrichments (n=19 files) in "/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments/"
 2. Clustering using default parameters of mmseqs easy-cluster
