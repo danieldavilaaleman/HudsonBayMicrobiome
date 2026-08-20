@@ -77,8 +77,8 @@ Steps for merging tsv files
 ------------------------
 
 1. Sort protein ID ans get column headers for summary tsv file
-
-```mkdir -p sorted_tmp
+```
+mkdir -p sorted_tmp
 
 header="Protein_ID"
 for f in *.tsv; do
@@ -88,5 +88,4 @@ for f in *.tsv; do
 done
 echo -e "$header" > merged_counts.tsv
 ```
-
 2. 
