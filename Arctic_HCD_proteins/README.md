@@ -31,25 +31,26 @@ Steps for Abundance quantification
 ------------------------
 #This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements
 1. Generate a mmseqs database format of the rep.arctic.HCD.proteins.faa
+
 `mmseqs createdb rep_arctic.HCD.proteins.faa rep.arctic.HCD.proteins.db`
-2. Create sequencing reads database
+3. Create sequencing reads database
 `mmseqs createdb /work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Environment/${sample_name}* $sample_name.db`
-3. Extract ORFs from the reads DB
+4. Extract ORFs from the reads DB
 `mmseqs extractorfs $sample_name.db $sample_name.orfs`
-4. Translate the ORFs in AA 
+5. Translate the ORFs in AA 
 `mmseqs translatenucs $sample_name.orfs $sample_name.trans`
-5. Mapping the proteins using pre-filter
+6. Mapping the proteins using pre-filter
 `mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter -s 2`
-6. Score the prefilter hits with gapless alignment
+7. Score the prefilter hits with gapless alignment
 `mmseqs rescorediagonal $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter $sample_name.rescore \
 -c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1`
-7. Keep the best mapping target
+8. Keep the best mapping target
 `mmseqs filterdb $sample_name.rescore $sample_name.tophit --extract-lines 1`
-8. Transpose DB to create, so at the end we can create a TSV file with Protein ID as first column and number of reads mapped to that protein as second
+9. Transpose DB to create, so at the end we can create a TSV file with Protein ID as first column and number of reads mapped to that protein as second
 `mmseqs swapresults $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.tophit $sample_name.swap`
-9. Now To make the counting of the reads per protein ID I should swap the DBs in the command as well 
+10. Now To make the counting of the reads per protein ID I should swap the DBs in the command as well 
 #NOTICE that target and query DBs are now swapped in position
 `mmseqs result2stats $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.swap $sample_name.stats --stat linecount`
-10. Now just create the TSv file using the same order of the DBs in the command
+11. Now just create the TSv file using the same order of the DBs in the command
 `mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0`
 
