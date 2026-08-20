@@ -73,3 +73,20 @@ Steps for Abundance quantification
 
 `mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0`
 
+Steps for merging tsv files
+------------------------
+
+1. Sort protein ID ans get column headers for summary tsv file
+
+```mkdir -p sorted_tmp
+
+header="Protein_ID"
+for f in *.tsv; do
+    prefix=$(basename "$f" .tsv)
+    header+=$'\t'"$prefix"
+    sort -k1,1 -t$'\t' "$f" > "sorted_tmp/${prefix}.sorted"
+done
+echo -e "$header" > merged_counts.tsv
+```
+
+2. 
