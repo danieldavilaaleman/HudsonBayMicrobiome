@@ -76,7 +76,7 @@ Steps for Abundance quantification
 Steps for merging tsv files
 ------------------------
 
-1. Sort protein ID ans get column headers for summary tsv file
+1. Sort protein ID and get column headers for summary tsv file
 ```
 mkdir -p sorted_tmp
 
@@ -88,4 +88,12 @@ for f in *.tsv; do
 done
 echo -e "$header" > merged_counts.tsv
 ```
-2. 
+2. Extract the protein IDs order from one of the sorted files (in this example the first file)
+```
+first_file=$(ls sorted_tmp/*.sorted | head -n 1)
+cut -f1 "$first_file" > sorted_tmp/ids.txt
+```
+
+
+
+
