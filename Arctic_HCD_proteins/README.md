@@ -73,6 +73,10 @@ Steps for Abundance quantification
 
 `mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0`
 
+**You can count have many reads mapped to the Arctic HCD proteins using:**
+`for f in *.tsv; do     printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done`
+
+
 Steps for merging tsv files
 ------------------------
 
