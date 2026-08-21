@@ -101,6 +101,15 @@ echo -e "$header" > merged_counts.tsv
 first_file=$(ls sorted_tmp/*.sorted | head -n 1)
 cut -f1 "$first_file" > sorted_tmp/ids.txt
 ```
+3. Read and collect read count values and stored in the merge tsv file
+```
+cut_cmds=()
+for f in sorted_tmp/*.sorted; do
+    cut_cmds+=(<(cut -f2 "$f"))
+done
+
+paste sorted_tmp/ids.txt "${cut_cmds[@]}" >> merged_counts.tsv
+```
 
 IMPORTANT NOTES
 ------------------------
