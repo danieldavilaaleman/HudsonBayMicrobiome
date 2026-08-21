@@ -83,9 +83,8 @@ printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done
 
 Steps for merging tsv files
 ------------------------
-
-1. Sort protein ID and get column headers for summary tsv file
 ```
+# Step 1. Sort protein ID and get column headers for summary tsv file
 mkdir -p sorted_tmp
 
 header="Protein_ID"
@@ -95,14 +94,14 @@ for f in *.tsv; do
     sort -k1,1 -t$'\t' "$f" > "sorted_tmp/${prefix}.sorted"
 done
 echo -e "$header" > merged_counts.tsv
-```
-2. Extract the protein IDs order from one of the sorted files (in this example the first file)
-```
+
+# Step 2. Extract the protein IDs order from one of the sorted files (in this example the first file)
+
 first_file=$(ls sorted_tmp/*.sorted | head -n 1)
 cut -f1 "$first_file" > sorted_tmp/ids.txt
-```
-3. Read and collect read count values and stored in the merge tsv file
-```
+
+# Step 3. Read and collect read count values and stored in the merge tsv file
+
 cut_cmds=()
 for f in sorted_tmp/*.sorted; do
     cut_cmds+=(<(cut -f2 "$f"))
