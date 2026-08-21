@@ -75,7 +75,10 @@ Steps for Abundance quantification
 
 **You can count have many reads mapped to the Arctic HCD proteins using:**
 
-`for f in *.tsv; do     printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done`
+```
+for f in *.tsv; do
+printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done
+```
 
 
 Steps for merging tsv files
