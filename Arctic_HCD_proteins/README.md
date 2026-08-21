@@ -104,6 +104,6 @@ cut -f1 "$first_file" > sorted_tmp/ids.txt
 
 IMPORTANT NOTES
 ------------------------
-mmseqs quantification was run using only the **R1/_1** file in marinemetagenomicsDB, marinemetagenomicsDB_Arctic and in TARA datasets.
-
+1. mmseqs quantification was run using only the **R1/_1** file in marinemetagenomicsDB, marinemetagenomicsDB_Arctic and in TARA datasets.
+2. Some samples from marinemetagenomicsDB and marinemetagenomicsDB_Arctic contain less than 10M reads
 
