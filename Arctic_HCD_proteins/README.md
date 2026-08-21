@@ -104,7 +104,7 @@ cut -f1 "$first_file" > sorted_tmp/ids.txt
 
 cut_cmds=()
 for f in sorted_tmp/*.sorted; do
-    cut_cmds+=(<(cut -f2 "$f"))
+    cut_cmds+=(<(cut -f3 "$f"))
 done
 
 paste sorted_tmp/ids.txt "${cut_cmds[@]}" >> merged_counts.tsv
