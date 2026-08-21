@@ -19,13 +19,26 @@ Overview of the approach
 Steps for Generation of Arctic Hydrocarbon proteins
 ------------------------
 1. Concatenation of all plass.faa files from all the enrichments (n=19 files) in "/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments/"
+**NOTE:**This generates a file with all the proteins. Same protein ID can be shared across the samples, creating a file with multiple proteins with same ID but different sequence.
+
 2. Clustering using default parameters of mmseqs easy-cluster
 3. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
 4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
-5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: grep "len:" hmmsearch.representative.tblout | cut -f1 -d " " > canadian_HCD_proteins.db.txt
-6. Appended the sequence ID of the AlkB.representative.tblout to canadian_HCD_proteins.db.txt using: grep "len:" hmmsearch.AlkB.representative.tblout | cut -f1 -d " " >> canadian_HCD_proteins.db.txt
-7. Keep unique protein sequences ID using cat canadian_HCD_proteins.db.txt | sort | uniq > uniq.arctic.HCD.proteins.db.ID.txt
-8. Extract the sequence of HCD identified proteins using the ID.txt file: "seqtk subseq canadian.enrichments_clustered_rep_seq.fasta uniq.arctic.HCD.proteins.db.ID.txt > rep_arctic.HCD.proteins.faa"
+5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
+
+`cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt`
+
+6. Appended the sequence ID of the AlkB.representative.tblout to canadian_HCD_proteins.db.txt using: 
+
+`cat hmmsearch.AlkB.representative.tblout | grep "len:" | cut -f1 -d " " | sort >> canadian_HCD_proteins.db.txt`
+
+7. Keep unique protein sequences ID using:
+
+`cat canadian_HCD_proteins.db.txt | sort | uniq > uniq.arctic.HCD.proteins.db.ID.txt`
+
+8. Extract the sequence of HCD identified proteins using the ID.txt file: 
+
+`seqtk subseq canadian.enrichments_clustered_rep_seq.fasta uniq.arctic.HCD.proteins.db.ID.txt > rep_arctic.HCD.proteins.faa`
 
 Steps for Abundance quantification
 ------------------------
