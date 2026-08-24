@@ -9,7 +9,7 @@ This directory contains a reproducible pipeline and documentation to:
 
 Overview of the approach
 ------------------------
-1. Assemble proteins (or obtain PLASS-assembled protein FASTA files) from Arctic metagenomic reads with PLASS.
+1. Assemble proteins from Arctic metagenomic reads with PLASS (Enrichments).
 2. Cluster assembled proteins to reduce redundancy and define representative protein sequences with LINCLUST.
 3. Search clustered proteins against the CANT‑HYD HMM database (HMMER `hmmsearch`) to identify hydrocarbon-degrading proteins.
 4. Filter hits using the highest identify valué to create an Arctic-specific protein reference set.
@@ -19,12 +19,14 @@ Overview of the approach
 Steps for Generation of Arctic Hydrocarbon proteins
 ------------------------
 1. Concatenation of all plass.faa files from all the enrichments (n=19 files) in "/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments/"
-**NOTE:**This generates a file with all the proteins. Same protein ID can be shared across the samples, creating a file with multiple proteins with same ID but different sequence.
 
-2. Clustering using default parameters of mmseqs easy-cluster
-3. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
-4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
-5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
+**NOTE:**This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
+`for file in *.faa; do name=$(basename $file _plass_assembly.faa); echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa; done`
+
+3. Clustering using default parameters of mmseqs easy-cluster
+4. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
+5. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
+6. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
 
 `cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt`
 
