@@ -42,65 +42,93 @@ mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichmen
 4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
 5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
 
-`cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt`
+```
+cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt
+```
 
 6. Appended the sequence ID of the AlkB.representative.tblout to canadian_HCD_proteins.db.txt using: 
 
-`cat hmmsearch.AlkB.representative.tblout | grep "len:" | cut -f1 -d " " | sort >> canadian_HCD_proteins.db.txt`
+```
+cat hmmsearch.AlkB.representative.tblout | grep "len:" | cut -f1 -d " " | sort >> canadian_HCD_proteins.db.txt
+```
 
 7. Keep unique protein sequences ID using:
 
-`cat canadian_HCD_proteins.db.txt | sort | uniq > uniq.arctic.HCD.proteins.db.ID.txt`
+```
+cat canadian_HCD_proteins.db.txt | sort | uniq > uniq.arctic.HCD.proteins.db.ID.txt
+```
 
 8. Extract the sequence of HCD identified proteins using the ID.txt file: 
 
-`seqtk subseq canadian.enrichments_clustered_rep_seq.fasta uniq.arctic.HCD.proteins.db.ID.txt > rep_arctic.HCD.proteins.faa`
+```
+seqtk subseq canadian.enrichments_clustered_rep_seq.fasta uniq.arctic.HCD.proteins.db.ID.txt > rep_arctic.HCD.proteins.faa
+```
 
 Steps for Abundance quantification
 ------------------------
 #This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements
 1. Generate a mmseqs database format of the rep.arctic.HCD.proteins.faa
    
-`mmseqs createdb rep_arctic.HCD.proteins.faa rep.arctic.HCD.proteins.db`
+```
+mmseqs createdb rep_arctic.HCD.proteins.faa rep.arctic.HCD.proteins.db
+```
 
 3. Create sequencing reads database
 
-`mmseqs createdb /work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Environment/${sample_name}* $sample_name.db`
+```
+mmseqs createdb /work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Environment/${sample_name}* $sample_name.db
+```
 
 4. Extract ORFs from the reads DB
 
-`mmseqs extractorfs $sample_name.db $sample_name.orfs`
+```
+mmseqs extractorfs $sample_name.db $sample_name.orfs
+```
 
 5. Translate the ORFs in AA 
 
-`mmseqs translatenucs $sample_name.orfs $sample_name.trans`
+```
+mmseqs translatenucs $sample_name.orfs $sample_name.trans
+```
 
 6. Mapping the proteins using pre-filter
 
-`mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter -s 2`
+```
+mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter -s 2
+```
 
 7. Score the prefilter hits with gapless alignment
 
-`mmseqs rescorediagonal $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter $sample_name.rescore \
--c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1`
+```
+mmseqs rescorediagonal $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter $sample_name.rescore \
+-c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1
+```
 
 8. Keep the best mapping target
 
-`mmseqs filterdb $sample_name.rescore $sample_name.tophit --extract-lines 1`
+```
+mmseqs filterdb $sample_name.rescore $sample_name.tophit --extract-lines 1
+```
 
 9. Transpose DB to create, so at the end we can create a TSV file with Protein ID as first column and number of reads mapped to that protein as second
 
-`mmseqs swapresults $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.tophit $sample_name.swap`
+```
+mmseqs swapresults $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.tophit $sample_name.swap
+```
 
 10. Now To make the counting of the reads per protein ID I should swap the DBs in the command as well 
 
 #NOTICE that target and query DBs are now swapped in position
 
-`mmseqs result2stats $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.swap $sample_name.stats --stat linecount`
+```
+mmseqs result2stats $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.swap $sample_name.stats --stat linecount
+```
 
 11. Now just create the TSv file using the same order of the DBs in the command
 
-`mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0`
+```
+mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0
+```
 
 **You can count have many reads mapped to the Arctic HCD proteins using:**
 
