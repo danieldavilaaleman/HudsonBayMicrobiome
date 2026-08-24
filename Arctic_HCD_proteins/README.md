@@ -25,10 +25,11 @@ Steps for Generation of Arctic Hydrocarbon proteins
 ```
 for file in *.faa
 do name=$(basename $file _plass_assembly.faa)
-echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa
+echo $name
+cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa
 done
 
-cat *_UHeaders.faa > all_plass_assemblies_UH.faa`
+cat *_UHeaders.faa > all_plass_assemblies_UH.faa
 ```
 
 2. Clustering using default parameters of mmseqs easy-cluster
