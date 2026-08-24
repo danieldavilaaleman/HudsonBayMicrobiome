@@ -54,11 +54,11 @@ cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > prot
 seqtk subseq all.enrichments.plass_rep_seq.fasta proteins.IDs.txt > rep_arctic.HCD.proteins.faa
 ```
 
-## This created an Arctic HCD protein DB of 502 representative sequences 
+**This created an Arctic HCD protein DB of 502 representative sequences**
 
 Steps for Abundance quantification
 ------------------------
-### This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements
+### This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements. All the quantification steps were performed with 10M reads as normalization step.
 1. Generate a mmseqs database format of the rep.arctic.HCD.proteins.faa
    
 ```
