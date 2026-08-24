@@ -20,7 +20,7 @@ Steps for Generation of Arctic Hydrocarbon proteins
 ------------------------
 1. Concatenation of all plass.faa files from all the enrichments (n=19 files) in "/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments/"
 
-**NOTE:**This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
+**NOTE:** This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
 
 ```
 for file in *.faa
@@ -32,7 +32,12 @@ done
 cat *_UHeaders.faa > all_plass_assemblies_UH.faa
 ```
 
-2. Clustering using default parameters of mmseqs easy-cluster
+2. Clustering using default parameters of mmseqs easy-linclust
+
+```
+ mmseqs easy-linclust all_plass_assemblies_UH.faa clustering_results tmp
+```
+
 3. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
 4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
 5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
