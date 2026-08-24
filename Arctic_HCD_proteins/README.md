@@ -40,30 +40,18 @@ mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichmen
 
 3. The representative proteins are in the file `all.enrichments.plass_rep_seq.fasta`. Total number of representative protein sequences = 42,502,062 from a total of = 117,146,334
 
-4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 for AlkB_MAB
+4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm **NOTE: I only used CANT-HYD.hmm due to I want the highest confidence in HCD genes**
 
 5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
 
 ```
-cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt
+cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > proteins.IDs.txt
 ```
 
-6. Appended the sequence ID of the AlkB.representative.tblout to canadian_HCD_proteins.db.txt using: 
+6. Extract the sequence of HCD identified proteins using the ID.txt file: 
 
 ```
-cat hmmsearch.AlkB.representative.tblout | grep "len:" | cut -f1 -d " " | sort >> canadian_HCD_proteins.db.txt
-```
-
-7. Keep unique protein sequences ID using:
-
-```
-cat canadian_HCD_proteins.db.txt | sort | uniq > uniq.arctic.HCD.proteins.db.ID.txt
-```
-
-8. Extract the sequence of HCD identified proteins using the ID.txt file: 
-
-```
-seqtk subseq canadian.enrichments_clustered_rep_seq.fasta uniq.arctic.HCD.proteins.db.ID.txt > rep_arctic.HCD.proteins.faa
+seqtk subseq all.enrichments.plass_rep_seq.fasta proteins.IDs.txt > rep_arctic.HCD.proteins.faa
 ```
 
 Steps for Abundance quantification
