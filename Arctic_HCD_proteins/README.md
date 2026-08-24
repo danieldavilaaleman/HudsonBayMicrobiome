@@ -21,6 +21,7 @@ Steps for Generation of Arctic Hydrocarbon proteins
 1. Concatenation of all plass.faa files from all the enrichments (n=19 files) in "/GENICE/M_Bautista/maria/GENICE/protein_catalog/plass_assemblies/Enrichments/"
 
 **NOTE:**This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
+
 `for file in *.faa; do name=$(basename $file _plass_assembly.faa); echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa; done`
 
 3. Clustering using default parameters of mmseqs easy-cluster
