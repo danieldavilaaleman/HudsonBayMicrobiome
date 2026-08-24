@@ -56,7 +56,7 @@ seqtk subseq all.enrichments.plass_rep_seq.fasta proteins.IDs.txt > rep_arctic.H
 
 Steps for Abundance quantification
 ------------------------
-#This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements
+### This is the steps that were perfomred for the abundance analysis of the HCD degrading representative proteins present in the Arctic enrichements
 1. Generate a mmseqs database format of the rep.arctic.HCD.proteins.faa
    
 ```
