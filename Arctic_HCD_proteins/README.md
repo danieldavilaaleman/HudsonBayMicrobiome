@@ -38,7 +38,7 @@ cat *_UHeaders.faa > all_plass_assemblies_UH.faa
 mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichments.plass tmp
 ```
 
-3. The representative proteins are in the file `all.enrichments.plass_rep_seq.fasta`. Total number of representative protein sequences = 42,502,062 from a total of = 
+3. The representative proteins are in the file `all.enrichments.plass_rep_seq.fasta`. Total number of representative protein sequences = 42,502,062 from a total of = 117,146,334
 
 4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 for AlkB_MAB
 
