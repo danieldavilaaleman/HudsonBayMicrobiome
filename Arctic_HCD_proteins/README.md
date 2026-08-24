@@ -23,7 +23,11 @@ Steps for Generation of Arctic Hydrocarbon proteins
 **NOTE:**This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
 
 ```
-for file in *.faa; do name=$(basename $file _plass_assembly.faa); echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa; done
+for file in *.faa
+do name=$(basename $file _plass_assembly.faa)
+echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa
+done
+
 cat *_UHeaders.faa > all_plass_assemblies_UH.faa`
 ```
 
