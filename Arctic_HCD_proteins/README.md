@@ -23,11 +23,12 @@ Steps for Generation of Arctic Hydrocarbon proteins
 **NOTE:**This generates a file with all the proteins. Same protein ID can be shared across different protein sequences. Therefore, rename the fasta headers with sample name:
 
 `for file in *.faa; do name=$(basename $file _plass_assembly.faa); echo $name; cat $file | sed "s/^>/>${name}_"/g > ${name}_plass_assembly_UHeaders.faa; done`
+`cat *_UHeaders.faa > all_plass_assemblies_UH.faa`
 
-3. Clustering using default parameters of mmseqs easy-cluster
-4. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
-5. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
-6. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
+2. Clustering using default parameters of mmseqs easy-cluster
+3. The representative proteins are in the file "canadian.enrichments_clustered_rep_seq.fasta". Total number of protein sequences = 7,441,786
+4. To identify hydrocarbon degradation genes, CANT-HYD coupled with hmmsearch using --cut_tc for CANT_HYD.hmm and -E 1e-9 --incE 1e-9 --incdomE 1e-9 fro AlkB_MAB
+5. To get the protein sequences ID identified as hydrocarbon degradation from CANT-HYD I used grep and cut on the tblout output from hmmsearch: 
 
 `cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > canadian_HCD_proteins.db.txt`
 
