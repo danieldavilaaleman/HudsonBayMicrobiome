@@ -5,24 +5,24 @@ The initial protein clustering was performed using default parameters of `easy-l
 
 | File | Number of READS |
 | :--- | ---: |
-| `015_E1_qc.abundances.tsv` | 76 |
-| `015_E2_qc.abundances.tsv` | 2 |
-| `016_E1_qc.abundances.tsv` | 0 |
-| `016_E2_qc.abundances.tsv` | 1 |
-| `018_E1_qc.abundances.tsv` | 1889 |
-| `018_E2_qc.abundances.tsv` | 6 |
-| `021_E1_qc.abundances.tsv` | 38 |
-| `021_E2_qc.abundances.tsv` | 38 |
-| `034_E1_qc.abundances.tsv` | 35 |
-| `034_E2_qc.abundances.tsv` | 49 |
-| `044_E1_qc.abundances.tsv` | 235 |
-| `044_E2_qc.abundances.tsv` | 422 |
-| `046_E1_qc.abundances.tsv` | 12730 |
-| `046_E2_qc.abundances.tsv` | 14724 |
-| `B1_E1_qc.abundances.tsv` | 3984 |
-| `B1_E2_qc.abundances.tsv` | 4702 |
-| `R3_E1_qc.abundances.tsv` | 3935 |
-| `R3_E2_qc.abundances.tsv` | 8349 |
+| 015_E1_qc.abundances.tsv | 76 |
+| 015_E2_qc.abundances.tsv | 2 |
+| 016_E1_qc.abundances.tsv | 0 |
+| 016_E2_qc.abundances.tsv | 1 |
+| 018_E1_qc.abundances.tsv | 1889 |
+| 018_E2_qc.abundances.tsv | 6 |
+| 021_E1_qc.abundances.tsv | 38 |
+| 021_E2_qc.abundances.tsv | 38 |
+| 034_E1_qc.abundances.tsv | 35 |
+| 034_E2_qc.abundances.tsv | 49 |
+| 044_E1_qc.abundances.tsv | 235 |
+| 044_E2_qc.abundances.tsv | 422 |
+| 046_E1_qc.abundances.tsv | 12730 |
+| 046_E2_qc.abundances.tsv | 14724 |
+| B1_E1_qc.abundances.tsv | 3984 |
+| B1_E2_qc.abundances.tsv | 4702 |
+| R3_E1_qc.abundances.tsv | 3935 |
+| R3_E2_qc.abundances.tsv | 8349 |
 
 This is ODD because I was expected to have a similar number of reads in each sample.
 
