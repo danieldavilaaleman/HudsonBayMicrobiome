@@ -9,7 +9,7 @@
 module load bioconda
 
 WORKDIR=`pwd`
-SCRATCH=/scratch/46217162
+SCRATCH=/scratch/$SLURM_JOBID
 
 cd $SCRATCH 
 
