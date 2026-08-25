@@ -30,7 +30,10 @@ After exploring the possibilities, I found that the rep portein fasta file is co
 
 This approach generates a HCD representative fasta file of **### 2,756 ARCTIC HCD rep proteins** but still only 3 rep protein sequences of 015_, 4 rep portein sequences from 018_, and 0 from sample 016_. While having 365 from samples B1_, 592 from samples 046_, and 409 from sample R3_.
 
-One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got: 
+One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got 626 protein identified as AlkB.
+
+Another point to consider is that with AlkB_MAB.hmm, there a re some targets with <100 aa. Since AlkB length is 408 aa, I will consider only target proteins with length > 300 aa.
+
 
 After running the quantification pipeline with this new representative proteins db, I got the following results:
 
