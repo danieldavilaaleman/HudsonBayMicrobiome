@@ -1,7 +1,7 @@
 ## Here, you will find some important notes about the data analysis about abundance quantification using MMSEQS2
 
 ### LINCLUST
-The initial protein clustering was performed using default parameters of `easy-linclust`. After using HMM search against the CANT-HYD.hmm --trusted_cut, this generates a representative fasta file of **502 ARCTIC HCD rep proteins**. After running the quantification of this rep proteins against a sub-sample of 10M reads of each of the enrichments raw reads, I got the following results:
+The initial protein clustering was performed using default parameters of `easy-linclust`. After using HMM search against the CANT-HYD.hmm --trusted_cutoff, this generates a representative fasta file of **502 ARCTIC HCD rep proteins**. After running the quantification of this rep proteins against a sub-sample of 10M reads of each of the enrichments raw reads, I got the following results:
 
 | File | Number of READS |
 | :--- | ---: |
@@ -29,6 +29,8 @@ This is ODD because I was expected to have a similar number of reads in each sam
 After exploring the possibilities, I found that the rep portein fasta file is concised of 188 proteins originated from 044_ samples and 93 proteins originated from B1_ samples, with 1 rep proteins sequence from 018_, 2 rep proteins from 015_, and no rep preotein from 016_. So this results are bias toward the origin of te HCD protein. My understanding is that with default clustering values `(--min-seq-id 0.9 -c 0.8)` will decrease the diversity of HCD proteins present in all sample sites. So, I re-run the clustering with higher values in `--min-seq-id 0.98` and `-c 0.9` in order to get a better representation of HCD protein variants from all sampled sites.
 
 This approach generates a HCD representative fasta file of **### 2,756 ARCTIC HCD rep proteins** but still only 3 rep protein sequences of 015_, 4 rep portein sequences from 018_, and 0 from sample 016_. While having 365 from samples B1_, 592 from samples 046_, and 409 from sample R3_.
+
+One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got: 
 
 After running the quantification pipeline with this new representative proteins db, I got the following results:
 
