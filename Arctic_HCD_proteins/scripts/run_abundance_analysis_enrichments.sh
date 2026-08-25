@@ -20,7 +20,7 @@ for file in /work/ebg_lab/gm/GENICE/M_Bautista/maria/GENICE/CleanData/Enrichment
 do
 name=$(basename $file R1.fastq.gz)
 echo "Subsampling $name files"
-seqkit sample -p 0.8 -s 11 $file | seqkit head -n 10000000 > ${name}_10M_R1.fastq 
+seqkit sample -p 0.8 -s 11 $file | seqkit head -n 10000000 > ${name}10M_R1.fastq 
 done
 
 ####### Running mmseqs2 ###################
