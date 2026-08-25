@@ -26,6 +26,6 @@ The initial protein clustering was performed using default parameters of `easy-l
 
 This is ODD because I was expected to have a similar number of reads in each sample.
 
-After exploring the possibilities, I found that in the rep portein fasta file concise of 188 proteins originated from 044_ samples  and 93 proteins originated from B1_ samples. So this results are bias toward the origin of te HCD protein. My understanding is that with default clustering values `(--min-seq-id 0.9 -c 0.8)` will decrease the diversity of HCD proteins present in all sample sites. So, I re-run the clustering with higher values in `--min-seq-id 0.98` and `-c 0.9` in order to get a better representation of HCD protein variants from all sampled sites.
+After exploring the possibilities, I found that the rep portein fasta file is concised of 188 proteins originated from 044_ samples and 93 proteins originated from B1_ samples, with 1 rep proteins sequence from 018_, 2 rep proteins from 015_, and no rep preotein from 016_. So this results are bias toward the origin of te HCD protein. My understanding is that with default clustering values `(--min-seq-id 0.9 -c 0.8)` will decrease the diversity of HCD proteins present in all sample sites. So, I re-run the clustering with higher values in `--min-seq-id 0.98` and `-c 0.9` in order to get a better representation of HCD protein variants from all sampled sites.
 
 This approach generates a HCD representative fasta file of **### ARCTIC HCD rep proteins**
