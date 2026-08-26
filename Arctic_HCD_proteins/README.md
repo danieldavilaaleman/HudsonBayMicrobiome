@@ -32,10 +32,10 @@ done
 cat *_UHeaders.faa > all_plass_assemblies_UH.faa
 ```
 
-2. Clustering using default parameters of mmseqs easy-linclust
+2. Clustering using mmseqs easy-linclust using a bit more stringent parameters for increase gene diversity
 
 ```
-mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichments.plass tmp
+mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichments.plass tmp --min-sed-id 0.98 --cov-mode 0 -c 0.9
 ```
 
 3. The representative proteins are in the file `all.enrichments.plass_rep_seq.fasta`. Total number of representative protein sequences = 42,502,062 from a total of = 117,146,334
