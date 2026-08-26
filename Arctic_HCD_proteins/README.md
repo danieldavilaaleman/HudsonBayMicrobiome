@@ -48,10 +48,10 @@ mmseqs easy-linclust $WORKDIR/all_plass_assemblies_UH.faa $WORKDIR/all.enrichmen
 cat hmmsearch.representative.tblout | grep "len:" | cut -f1 -d " " | sort > proteins.IDs.txt
 ```
 
-6. Append the protein IDs from hhsearch.AlkB.representative.tblout, sort and remove duplicate protein IDs and extract the sequence of HCD identified proteins using the ID.txt file: 
+6. Append the protein IDs from hhsearch.AlkB.representative.tblout (target proteins > 300 aa), sort and remove duplicate protein IDs and extract the sequence of HCD identified proteins using the ID.txt file: 
 
 ```
-cat hmmsearch.AlkB.representative.tblout | grep "len:" | cut -f1 -d " " | sort >> proteins.IDs.txt
+cat hmmsearch.AlkB.representative.tblout | grep "len:" | tr -s " " | cut -f1,19 -d " " | sed s"/len://g" | awk '$2 >= 300' | cut -f1 -d " " >> proteins.IDs.txt
 
 cat proteins.IDs.txt | sort | uniq > uniq.proteins.IDs.txt
 
