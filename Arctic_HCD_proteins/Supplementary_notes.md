@@ -28,7 +28,7 @@ This is ODD because I was expected to have a similar number of reads in each sam
 
 After exploring the possibilities, I found that the rep portein fasta file is concised of 188 proteins originated from 044_ samples and 93 proteins originated from B1_ samples, with 1 rep proteins sequence from 018_, 2 rep proteins from 015_, and no rep preotein from 016_. So this results are bias toward the origin of te HCD protein. My understanding is that with default clustering values `(--min-seq-id 0.9 -c 0.8)` will decrease the diversity of HCD proteins present in all sample sites. So, I re-run the clustering with higher values in `--min-seq-id 0.98` and `-c 0.9` in order to get a better representation of HCD protein variants from all sampled sites.
 
-This approach generates a HCD representative fasta file of **### 2,756 ARCTIC HCD rep proteins** but still only 3 rep protein sequences of 015_, 4 rep portein sequences from 018_, and 0 from sample 016_. While having 365 from samples B1_, 592 from samples 046_, and 409 from sample R3_.
+This approach generates a HCD representative fasta file of **2,756 ARCTIC HCD rep proteins** but still only 3 rep protein sequences of 015_, 4 rep portein sequences from 018_, and 0 from sample 016_. While having 365 from samples B1_, 592 from samples 046_, and 409 from sample R3_.
 
 After running the quantification pipeline with this new representative proteins db, I got the following results:
 | File | Number of READS |
@@ -55,3 +55,8 @@ After running the quantification pipeline with this new representative proteins 
 One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got 626 protein identified as AlkB. Another point to consider is that with AlkB_MAB.hmm, there are some targets with <100 aa. Since AlkB length is 408 aa, I will consider only target proteins with length > 300 aa.
 
 Applying this strategy over the representative protein (--min-seq-id 0.98 -c 9) and running AlkB-MAB.hmm, I got 19,622 target proteins identified as AlkB. After removing the target protein < 300 aa, 5,314 remained. Now this collection of AlkB proteins includes 63 proteins derived from 016_, 105 from samples 015_, and 423 from samples 018_. This protein IDs were append with IDs obtained from CANT-HYD.hmm, sorted and remove duplicates (uniq) before using seqkit to extract the sequences of the protein IDs for further quantification.
+
+The total number of protein IDs before sorting and uniq is 2,756 + 5,314 = 8,070 protein IDs (proteins_IDs.txt -> This file contains one single column with protein IDs).
+
+After removing duplicate values (uniq) the total number of protein IDs is 7,010. This is the number of representative Arctic proteins identified as HCD!
+
