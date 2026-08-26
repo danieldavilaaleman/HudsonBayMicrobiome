@@ -80,6 +80,8 @@ Here are the results of the quantification (total number of reads mapped to the 
 | 046_E2_qc.abundances.tsv | 15272 |
 | B1_E1_qc.abundances.tsv | 8426 |
 | B1_E2_qc.abundances.tsv | 9822 |
+| R3_E1_qc.abundances.tsv	| 6817 |
+| R3_E2_qc.abundances.tsv	| 9036 |
 
 
 This indicates that the created DB contains a diverse number of HCD proteins which can be identified using this Enrichment controls. So if an environmental sample shows a low quantification number (10<) it is not because of a Canadian protein diversity. **ONE IMPORTANT QUESTION** that reviewers can ask is that I do not see large numbers of reads in other samples in the ARCTIC or ANTARCTIC due to there would be different variants of HCD proteins in each location. SO a way to answer this question would be performing a PLASS assembly of each sample location across the ARCTIC and ANTARCTIC run against CANT-HYD and AlkB-MAB.hmm, clustering with the Canadian HCD protein DB and quantify in each location.
