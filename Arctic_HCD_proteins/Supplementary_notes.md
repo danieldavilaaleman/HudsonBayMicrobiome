@@ -52,7 +52,6 @@ After running the quantification pipeline with this new representative proteins 
 | R3_E1_qc.abundances.tsv | 4557 |
 | R3_E2_qc.abundances.tsv | 8922 |
 
-One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got 626 protein identified as AlkB.
+One possible explanation about this results could be the lack of HCD representative in 016 using the hmm file CANT-HYD --trusted-cutoff. I asked if the 016 plass assembly proteins contains HCD in CANT-HYD.hmm and the result was 0 sequences. Now, running again the same 016 PLASS assembly against ALKB_MAB.hmm with 1e-9 cutoff I got 626 protein identified as AlkB. Another point to consider is that with AlkB_MAB.hmm, there are some targets with <100 aa. Since AlkB length is 408 aa, I will consider only target proteins with length > 300 aa.
 
-Another point to consider is that with AlkB_MAB.hmm, there a re some targets with <100 aa. Since AlkB length is 408 aa, I will consider only target proteins with length > 300 aa.
-
+Applying this strategy over the representative protein (--min-seq-id 0.98 -c 9) and running AlkB-MAB.hmm, I got 19,622 target proteins identified as AlkB. After removing the target protein < 300 aa, 5,314 remained. Now this collection of AlkB proteins includes 63 proteins derived from 016_, 105 from samples 015_, and 423 from samples 018_. This protein IDs were append with IDs obtained from CANT-HYD.hmm, sorted and remove duplicates (uniq) before using seqkit to extract the sequences of the protein IDs for further quantification.
