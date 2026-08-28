@@ -168,7 +168,12 @@ Steps for creating AlkB and cyp153 protein ID txt files
 
 For the plotting of number of read mapped against the Arctic HCD protein collection, we decided to normalize using the RPKG (read per kilobase genome equivalence). Therefore we need to average the length of all AlkB and CYP153 proteins included in the Arctic uniq protein DB.
 
-For that the first step is create a AlkB.protein.ID.txt file that contain only protein IDs for AlkB proteins.
+For that the first step is create a AlkB.protein.ID.txt file that contain only protein IDs for AlkB proteins:
+
+```
+cat hmmsearch.representative.tblout | grep "len:" | tr -s " " | cut -f1,3 -d " " | grep "AlkB" > AlkB.proteins.IDs.txt
+```
+
 
 IMPORTANT NOTES
 ------------------------
