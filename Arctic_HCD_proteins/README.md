@@ -142,7 +142,7 @@ cat hmmsearch.AlkB.representative.tblout | grep "len:" > protein.ID.with.HCD.nam
 cat hmmsearch.representative.tblout | grep "len:" >> protein.ID.with.HCD.name.txt
 ```
 
-2. Becasue the file "protein.id.with.HCD.name.txt" contains >20,000 protein IDs without sorting and filter for protein length, I grep the protein IDs from the file unique.proteins.IDs.txt to get only the protein IDs from our unique Arctic protein DB
+2. Becasue the file "protein.id.with.HCD.name.txt" contains >20,000 protein IDs without sorting and filter for protein length, I grep the protein IDs from the file unique.proteins.IDs.txt to get only the protein IDs from our unique Arctic protein DB. I kept only the protein ID and the HCD name
 ```
 grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt > proteins.IDs.names.txt
 ```
