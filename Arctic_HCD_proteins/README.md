@@ -134,45 +134,19 @@ printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done
 ```
 
 
-Steps for merging tsv files
+Steps for adding metadata to each tsv files
 ------------------------
+1. Create a txt file with protein ID and HCD gene name using the CANT-HYD tblout files
 ```
-# Step 1. Sort protein ID and get column headers for summary tsv file
-mkdir -p sorted_tmp
-
-header="Protein_ID"
-for f in *.tsv; do
-    prefix=$(basename "$f" .tsv)
-    header+=$'\t'"$prefix"
-    sort -k1,1 -t$'\t' "$f" > "sorted_tmp/${prefix}.sorted"
-done
-echo -e "$header" > merged_counts.tsv
-
-# Step 2. Extract the protein IDs order from one of the sorted files (in this example the first file)
-
-first_file=$(ls sorted_tmp/*.sorted | head -n 1)
-cut -f1 "$first_file" > sorted_tmp/ids.txt
-
-# Step 3. Read and collect read count values and stored in the merge tsv file
-
-cut_cmds=()
-for f in sorted_tmp/*.sorted; do
-    cut_cmds+=(<(cut -f3 "$f"))
-done
-
-paste sorted_tmp/ids.txt "${cut_cmds[@]}" >> merged_counts.tsv
+cat hmmsearch.AlkB.representative.tblout | grep "len:" > protein.ID.with.HCD.name.txt
+cat hmmsearch.representative.tblout | grep "len:" >> protein.ID.with.HCD.name.txt
 ```
 
-Steps for creating AlkB and cyp153 protein ID txt files
-------------------------
-
-For the plotting of number of read mapped against the Arctic HCD protein collection, we decided to normalize using the RPKG (read per kilobase genome equivalence). Therefore we need to average the length of all AlkB and CYP153 proteins included in the Arctic uniq protein DB.
-
-For that the first step is create a AlkB.protein.ID.txt file that contain only protein IDs for AlkB proteins:
-
+2. Becasue the file "protein.id.with.HCD.name.txt" contains >20,000 protein IDs without sorting and filter for protein length, I grep the protein IDs from the file unique.proteins.IDs.txt to get only the protein IDs from our unique Arctic protein DB
 ```
-cat hmmsearch.representative.tblout | grep "len:" | tr -s " " | cut -f1,3 -d " " | grep "AlkB" > AlkB.proteins.IDs.txt
+grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt > proteins.IDs.names.txt
 ```
+3. 
 
 
 IMPORTANT NOTES
