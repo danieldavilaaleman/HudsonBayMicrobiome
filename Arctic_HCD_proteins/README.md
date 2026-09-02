@@ -58,7 +58,7 @@ cat proteins.IDs.txt | sort | uniq > uniq.proteins.IDs.txt
 seqtk subseq all.enrichments.plass_rep_seq.fasta uniq.proteins.IDs.txt > rep_arctic.HCD.proteins.faa
 ```
 
-**This created an Arctic HCD protein DB of 502 representative sequences**
+**This created an Arctic HCD protein DB of 7,010 representative sequences**
 
 Steps for Abundance quantification
 ------------------------
