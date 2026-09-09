@@ -155,15 +155,15 @@ This is necessary because the first grep get the protein IDs identified as AlkB 
 grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt | tr -s " " | cut -f 3,19 -d " " | sed "s/AlkB_HMM/AlkB/g" | sort | uniq | sed "s/len://g" > average_len.rep_arctic.HCD.proteins.txt
 
 awk '{
->     sum[$2] += $3
->     count[$2]++
+>     sum[$2] += $3 # Add to the existing total. The next time that AlkB apperas with add the value in that row
+>     count[$2]++ # Add a count every single time AlkB appears, this is for the average calculation
 > }
 > END {
 >     printf "gene_name\tavg_length\n"
->     for (g in sum) {
->         printf "%s\t%.2f\n", g, sum[g] / count[g]
+>     for (g in sum) { # Loop for every single gene in the sum array
+>         printf "%s\t%.2f\n", g, sum[g] / count[g] # %s place a string "g"; %.2f place a floating point number rounded to 2 decimals
 >     }
-> }' average_len.rep_arctic.HCD.proteins.txt
+> }' average_len.rep_arctic.HCD.proteins.txt > protein.average.values.txt
 ```
 
 
