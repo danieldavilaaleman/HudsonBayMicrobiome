@@ -134,7 +134,7 @@ printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done
 ```
 
 
-Steps for adding metadata to each tsv files
+Steps for getting average gene length for each HCD marker and metadata needed for R script
 ------------------------
 1. Create a txt file with protein ID and HCD gene name using the CANT-HYD tblout files
 ```
@@ -142,13 +142,29 @@ cat hmmsearch.AlkB.representative.tblout | grep "len:" > protein.ID.with.HCD.nam
 cat hmmsearch.representative.tblout | grep "len:" >> protein.ID.with.HCD.name.txt
 ```
 
-2. Becasue the file "protein.id.with.HCD.name.txt" contains >20,000 protein IDs without sorting and filter for protein length, I grep the protein IDs from the file unique.proteins.IDs.txt to get only the protein IDs from our unique Arctic protein DB. 
+2. Because the file "protein.id.with.HCD.name.txt" contains >20,000 protein IDs without sorting and filter for protein length, I grep the protein IDs from the file unique.proteins.IDs.txt to get only the protein IDs from our unique Arctic protein DB. 
 I kept only the protein ID and the HCD name. I also modify the name AlkB_HMM to AlkB only so I can sort and uniq to get the uniq 7,010 protein IDs. 
 This is necessary because the first grep get the protein IDs identified as AlkB from CANT-HYD.hmm and the IDs (same) from AlkB_MAB.hmm
 ```
- grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt | tr -s " " | cut -f 1,3 -d " " | sed "s/AlkB_HMM/AlkB/g" | sort | uniq | wc -l > unique.proteins.IDs.names.txt
+ grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt | tr -s " " | cut -f 1,3 -d " " | sed "s/AlkB_HMM/AlkB/g" | sort | uniq > unique.proteins.IDs.names.txt
 ```
-3. 
+
+3. Now to get the average length of each maker gene in the unique Arctic HCD protein DB
+
+```
+grep -wFf unique.proteins.IDs.txt protein.ID.with.HCD.name.txt | tr -s " " | cut -f 3,19 -d " " | sed "s/AlkB_HMM/AlkB/g" | sort | uniq | sed "s/len://g" > average_len.rep_arctic.HCD.proteins.txt
+
+awk '{
+>     sum[$2] += $3
+>     count[$2]++
+> }
+> END {
+>     printf "gene_name\tavg_length\n"
+>     for (g in sum) {
+>         printf "%s\t%.2f\n", g, sum[g] / count[g]
+>     }
+> }' average_len.rep_arctic.HCD.proteins.txt
+```
 
 
 IMPORTANT NOTES
