@@ -90,14 +90,14 @@ mmseqs translatenucs $sample_name.orfs $sample_name.trans
 6. Mapping the proteins using pre-filter
 
 ```
-mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter -s 2
+mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter -s 4
 ```
 
 7. Score the prefilter hits with gapless alignment
 
 ```
 mmseqs rescorediagonal $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter $sample_name.rescore \
--c 1 --cov-mode 2 --min-seq-id 0.95 --rescore-mode 2 -e 0.000001 --sort-results 1
+-c 1 --cov-mode 2 --min-seq-id 0.98 --rescore-mode 2 -e 0.000001 --sort-results 1
 ```
 
 8. Keep the best mapping target
