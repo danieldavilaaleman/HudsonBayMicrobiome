@@ -172,5 +172,10 @@ awk '{
 IMPORTANT NOTES
 ------------------------
 1. mmseqs quantification was run using only the **R1/_1** file in marinemetagenomicsDB, marinemetagenomicsDB_Arctic and in TARA datasets.
-2. Some samples from marinemetagenomicsDB and marinemetagenomicsDB_Arctic contain less than 10M reads
+2. Some samples from marinemetagenomicsDB and marinemetagenomicsDB_Arctic that contain less than 10M reads where removed from this analysis using
+
+```
+grep
+```
+
 
