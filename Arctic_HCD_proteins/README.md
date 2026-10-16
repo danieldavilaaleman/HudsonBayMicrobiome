@@ -94,7 +94,7 @@ mmseqs prefilter $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_
 ```
 
 7. Score the prefilter hits with gapless alignment
-   # I used 100% as min_seq_id to get exact match of the reads to the target DB
+I used 100% as min_seq_id to get exact match of the reads to the target DB
 
 ```
 mmseqs rescorediagonal $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.prefilter $sample_name.rescore \
