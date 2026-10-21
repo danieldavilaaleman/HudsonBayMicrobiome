@@ -169,7 +169,7 @@ awk '{
 
 **Before plotting lets remove the samples that have less than 10,000,000 reads**
 ```
-cat subsampling_number_of_reads.out   | grep "subsampling"   | tr -s " " | cut -f1,4 -d " " | awk '{n=$2; gsub(/,/, "", n); if (n + 0 < 10000000) print}'| sed 's/subsampling_10M\// /g' > low_read_samples.txt
+ cat subsampling_number_of_reads.out   | grep "subsampling"   | tr -s " " | cut -f1,4 -d " " | awk '{n=$2; gsub(/,/, "", n); if (n + 0 < 10000000) print}' | cut -f1 -d " " | sed 's/subsampling_10M\// /g' > low_read_samples.txt
 ```
 
 
