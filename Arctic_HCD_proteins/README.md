@@ -122,7 +122,7 @@ mmseqs swapresults $sample_name.trans $SCRATCH/rep.arctic.HCD.proteins.db $sampl
 mmseqs result2stats $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.swap $sample_name.stats --stat linecount
 ```
 
-11. Now just create the TSv file using the same order of the DBs in the command
+11. Now just create the TSV file using the same order of the DBs in the command
 
 ```
 mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_name.stats $sample_name.abundances.tsv --target-column 0
@@ -134,7 +134,6 @@ mmseqs createtsv $SCRATCH/rep.arctic.HCD.proteins.db $sample_name.trans $sample_
 for f in *.tsv; do
 printf "%s\t%s\n" "$f" "$(awk -F'\t' '{sum += $3} END {print sum}' "$f")"; done
 ```
-
 
 Steps for getting average gene length for each HCD marker and metadata needed for R script
 ------------------------
@@ -167,6 +166,11 @@ awk '{
 >     }
 > }' average_len.rep_arctic.HCD.proteins.txt > protein.average.values.txt
 ```
+
+**Before plotting lets remove the samples that have less than 10,000,000 reads**
+
+cat subsampling_number_of_reads.out   | grep "subsampling"   | tr -s " " | cut -f1,4 -d " " | awk '{n=$2; gsub(/,/, "", n); if (n + 0 < 10000000) print}'| sed 's/subsampling_10M\// /g' > low_read_samples.txt
+
 
 
 IMPORTANT NOTES
